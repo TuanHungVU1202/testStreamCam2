@@ -1,0 +1,166 @@
+<!-- /. NAV SIDE  -->
+<nav class="navbar-default navbar-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav" id="main-menu">
+
+            <li>
+                <a href="home"><i class="fa fa-dashboard"></i> Dashboard</a>
+            </li>
+            <li>
+                <a href="control"><i class="fa fa-list-alt"></i> Control</a>
+            </li>
+            <li>
+                <a href="scenes"><i class="fa fa-picture-o"></i> Scenes</a>
+            </li>
+            <li>
+                <a class="active-menu"><i class="fa fa-bar-chart-o"></i> Charts</a>
+            </li>
+            <li>
+                <a href="camera"><i class="fa fa-camera"></i> Camera</a>
+            </li>
+            
+            <li>
+                <a href="table.html"><i class="fa fa-table"></i> Responsive Tables</a>
+            </li>
+            <li>
+                <a href="form.html"><i class="fa fa-edit"></i> Forms </a>
+            </li>
+            <li>
+                <a href="form.html"><i class="fa fa-fw fa-file"></i> Empty Page</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<!-- /. PAGE WRAPPER  --> 
+<div id="page-wrapper" >
+    <div id="page-inner">
+        <style>
+        img.logo {
+            width:100px;
+            height:100px;
+        }
+        img.houseoverview{
+            float:left;
+            margin-left: 1cm;
+            margin-top: 1cm;
+            width:500px;
+            height:267px;
+        }
+        h1.titlesmarthome{
+            font-size: 250%;
+            margin-top: 1cm;
+            margin-left: 3.5cm;
+        }
+        div.boxDistance{
+            margin-top: 1.5cm;
+        }
+        div.box{
+            position: relative;
+	        text-align: center;
+	        width: 120px;
+	        height: 120px;
+	        margin: 20px auto 10px auto;
+        }
+        div.box .letterInsideGasdetectionBox {
+            display: block;
+            position: absolute;
+            font-size: 26px;
+            top: 38px;
+            width: 120px;
+            color: {{letterInsideGasdetectionBox}};
+        }
+        div.box .letterInsideHumandetectionBox {
+            display: block;
+            position: absolute;
+            font-size: 26px;
+            top: 38px;
+            width: 120px;
+            color: {{letterInsideHumandetectionBox}};
+        }
+        div.box .letterInsideSecurityBox {
+            display: block;
+            position: absolute;
+            font-size: 26px;
+            top: 38px;
+            width: 120px;
+            color: {{letterInsideSecurityBox}};
+        }
+        </style>
+
+        <h2> CHART PAGE</h2>
+        <br>
+        <div>
+            <form action="/filterPower">
+                Choose date:
+                <input type="number" name="chartChooseDate" min="1" max="31" value = {{date}}>
+                /
+                <input type="number" name="chartChooseMonth" min="1" max="12" value = {{month}}>
+                /
+                <input type="number" name="chartChooseYear" min="2017" max="2040" value = {{year}}>
+                <button type="submit">Filter </button>
+            </form>
+        </div>
+        
+        <div class = "boxDistance">
+            <div class="col-md-14 col-sm-14 col-xs-14">                     
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Power Consumption Chart
+                    </div>
+                    <div class="panel-body">
+                         <div style="width:25%, height:100%">
+                             <canvas id="myChart"></canvas>
+                         </div>
+                    </div>
+                </div>            
+            </div>
+        </div> 
+
+       
+
+    </div>    
+</div>
+
+
+<script>
+    //var xdata = ['1:00','3:30','4:15','6:15','7:15','8:15'];
+    var xdata = [{{chartTime}}];
+    var ydata = [{{chartPower}}];
+    var ctx = document.getElementById("myChart").getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: xdata,
+            datasets: [{
+                label: 'Power',
+                data: ydata,
+                backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                borderColor:'rgba(255, 159, 64, 1)',
+                borderWidth: 3,
+            }]
+        },
+        options: {
+            scales: {
+                xAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Time'
+                    }
+                }],
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true,
+                    },
+                    scaleLabel: {
+                            display: true,
+                            labelString: 'Power (W)'
+                    }
+                }],
+            }
+        }
+    });
+</script>
+
+
+
+	
