@@ -10,23 +10,31 @@
 
 var errorElement = document.querySelector('#errorMsg');
 
-var video1 = document.querySelector('video#video1');
+//var video1 = document.querySelector('video#video1');
 
 var pipes = [];
-var localStream;
-var remoteStream;
+//var localStream;
+//var remoteStream;
 
 // Put variables in global scope to make them available to the browser console.
-var constraints = window.constraints = {
+/*var constraints = window.constraints = {
   audio: false,
   video: true
 };
+*/
 
-function gotStream(stream) {
+function openStream(){
+    const config = { audio: true, video: true };
+    return navigator.mediaDevices.getUserMedia(config);
+};
+
+function playStream(idVidTag, stream) {
   trace('Received local stream');
+  const video1 = document.getElementById(idVidTag);
   video1.srcObject = stream;
-  window.localStream = stream;
-  callButton.disabled = false;
+  video1.play();
+  //window.localStream = stream;
+  //callButton.disabled = false;
 }
 
 
@@ -49,5 +57,9 @@ function errorMsg(msg, error) {
   }
 }
 
-navigator.mediaDevices.getUserMedia(constraints).
-  then(gotStream).catch(handleError);
+openStream()
+    .then(stream => playStream('localVideo',stream)).catch(handleError);
+
+/*navigator.mediaDevices.getUserMedia(constraints).
+  then(playStream).catch(handleError);
+  */

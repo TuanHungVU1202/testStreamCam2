@@ -37,13 +37,21 @@
         <h2> SECURITY CAMERA</h2>
         <br>
         <div>
-            <iframe width="650" height="490" src="http://192.168.1.145:8081/">
-            </iframe>
+            <video id="localVideo" width="650" height="490" autoplay></video>
+            <!--<iframe id="localVideo" width="650" height="490" >
+            </iframe>-->
+
         </div>
 
     </div>    
-</div>        
+</div>
 
+<script src="webRTC/main.js"></script>
+<script src="webRTC/jquery.js"></script>
+<script src="webRTC/peer.js"></script>
+<script src="webRTC/js/videopipe.js"></script>
+<script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+<script src="webRTC/js/common.js"></script>
 <!--
 <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
 <script src="webRTC/js/common.js"></script>
