@@ -5,13 +5,13 @@ var exphbs  = require('express-handlebars');
 var fetch = require('node-fetch');
 var bodyParser = require('body-parser');
 
-//app.listen(3000);
 
-var port = process.env.PORT || 8000
+var port = process.env.PORT || 2111
 app.listen(port, function() {
     console.log("App is running on port " + port);
 });
 
+//mongodb tren mlab
 var mongourl= 'mongodb://admin:admin123@ds139942.mlab.com:39942/mongotest-1';
 //khai bao cho mongodb
 var MongoClient = require('mongodb').MongoClient;
