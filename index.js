@@ -59,6 +59,7 @@ var loginFlag = false;
 var checkChangedFlag = {};
 checkChangedFlag.changedFlagStatus = "false";
 
+//init states for devices
 var deviceState = {};
 deviceState.device1 = "off";
 deviceState.device2 = "off";
@@ -74,6 +75,7 @@ deviceState.device3TimeOff = "00:00";
 deviceState.device4TimeOn = "00:00";
 deviceState.device4TimeOff = "00:00";
 
+//init scenes
 var scenes = {};
 scenes.iAmHome = "off";
 scenes.goodmorning = "off";
@@ -94,14 +96,28 @@ function FetchData(){
 }
 */
 
-
+//connect to mongoDb using mLab
 MongoClient.connect(mongourl, function(err, db){
     assert.equal(null,err);
     console.log("Successfully connect MongoDB");
-    var projection = {"date" :1, "year" :1,"month" :1, "time" :1, "P":1, "_id":0}; //"deviceID": 1, 
+
+    //projection is the object contains needed data
+    var projection = {
+    	"date" :1, 
+    	"year" :1,
+    	"month" :1, 
+    	"time" :1, "P":1, 
+    	"_id":0		//"deviceID": 1,
+    	}; 				 
+    
     //db.collection('test2').insertOne({"deviceID": "D04", "date": d.getDate(), "month": d.getMonth(), "year": d.getFullYear(), "time": d.getHours() + "." + d.getMinutes(), "P": req.query.Power})
     var d = new Date();
-    var cursor = db.collection('test2').find({time: {$gt: '1.20'},date: {$eq: d.getDate()},month: {$eq: d.getMonth()+1},year: {$eq: d.getFullYear()}})
+    var cursor = db.collection('test2').find({
+    	time: {$gt: '1.20'},
+    	date: {$eq: d.getDate()},
+    	month: {$eq: d.getMonth()+1},
+    	year: {$eq: d.getFullYear()}
+    })
     cursor.project(projection)
     cursor.forEach(
         function(doc) {
@@ -171,7 +187,12 @@ app.get('/home', function (req, res) {
             assert.equal(null,err);
             var projection = {"date" :1, "year" :1,"month" :1, "time" :1, "P":1, "_id":0};
             var d = new Date();
-            var cursor = db.collection('test2').find({time: {$gt: '1.20'},date: {$eq: d.getDate()},month: {$eq: d.getMonth()+1},year: {$eq: d.getFullYear()}})
+            var cursor = db.collection('test2').find({
+            	time: {$gt: '1.20'},
+            	date: {$eq: d.getDate()},
+            	month: {$eq: d.getMonth()+1},
+            	year: {$eq: d.getFullYear()}
+            })
             cursor.project(projection)
             cursor.forEach(
                 function(doc) {
@@ -286,7 +307,14 @@ app.get('/readPowerFromSystem', function (req, res) {
     Power = req.query.Power;
     MongoClient.connect(mongourl, function(err, db){
         assert.equal(null,err);
-        db.collection('test2').insertOne({"deviceID": "D04", "date": d.getDate(), "month": d.getMonth()+1, "year": d.getFullYear(), "time": d.getHours() + "." + d.getMinutes(), "P": req.query.Power})
+        db.collection('test2').insertOne({
+        	"deviceID": "D04", 
+        	"date": d.getDate(), 
+        	"month": d.getMonth()+1, 
+        	"year": d.getFullYear(), 
+        	"time": d.getHours() + "." + d.getMinutes(), 
+        	"P": req.query.Power
+        })
     });
 });
 
