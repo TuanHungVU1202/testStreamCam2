@@ -206,6 +206,7 @@ app.get('/home', function (req, res) {
 });
 
 //CONTROL
+//Link with control.handlerbars, see device1ButtonColor and so on
 app.get('/control', function (req, res) {
     if(loginFlag === true){
         res.render('control', {
