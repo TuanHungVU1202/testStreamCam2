@@ -35,6 +35,8 @@ var humanDetection = "NO";
 var securityStatus = "UNARMED";
 var Power = 0;
 
+//getDate, getMonth, getFullYear la ham co san
+//details at https://www.w3schools.com/jsref/jsref_obj_date.asp
 var d1 = new Date();
 dateNow =  d1.getDate();
 monthNow = d1.getMonth() + 1;
