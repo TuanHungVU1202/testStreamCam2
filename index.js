@@ -35,7 +35,8 @@ var humanDetection = "NO";
 var securityStatus = "UNARMED";
 var Power = 0;
 
-//getDate, getMonth, getFullYear la ham co san
+//getDate, getMonth, getFullYear are defined methods
+//Methods return number, eg. getDate returns day of the month from 1 to 31
 //details at https://www.w3schools.com/jsref/jsref_obj_date.asp
 var d1 = new Date();
 dateNow =  d1.getDate();
@@ -106,15 +107,16 @@ MongoClient.connect(mongourl, function(err, db){
     	"date" :1, 
     	"year" :1,
     	"month" :1, 
-    	"time" :1, "P":1, 
+    	"time" :1, 
+    	"P":1, 
     	"_id":0		//"deviceID": 1,
     	}; 				 
     
     //db.collection('test2').insertOne({"deviceID": "D04", "date": d.getDate(), "month": d.getMonth(), "year": d.getFullYear(), "time": d.getHours() + "." + d.getMinutes(), "P": req.query.Power})
     var d = new Date();
     var cursor = db.collection('test2').find({
-    	time: {$gt: '1.20'},
-    	date: {$eq: d.getDate()},
+    	time: {$gt: '1.20'},			//select TIME where value of "time" is greater than "1.2"
+    	date: {$eq: d.getDate()},		//select DATE where value of "date" equal to returned value from getDate method.
     	month: {$eq: d.getMonth()+1},
     	year: {$eq: d.getFullYear()}
     })
@@ -185,7 +187,13 @@ app.get('/home', function (req, res) {
             chartTime = [];
             chartPower = [];
             assert.equal(null,err);
-            var projection = {"date" :1, "year" :1,"month" :1, "time" :1, "P":1, "_id":0};
+            var projection = {
+            	"date" :1, 
+            	"year" :1,
+            	"month" :1, 
+            	"time" :1, 
+            	"P":1, 
+            	"_id":0};
             var d = new Date();
             var cursor = db.collection('test2').find({
             	time: {$gt: '1.20'},
