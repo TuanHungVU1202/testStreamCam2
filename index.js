@@ -129,7 +129,7 @@ MongoClient.connect(mongourl, function(err, db){
 
     //filtered data with needed field using projection
     cursor.project(projection)
-    //loop, use function doc to READ document from database with field "time", "P"
+    //for each document in the cursor, apply the function(doc)
     //use this to get the value to draw the chart
     cursor.forEach(
         function(doc) {
@@ -144,9 +144,6 @@ MongoClient.connect(mongourl, function(err, db){
         }
     );   
 });
-
-//Neu tat mongodb roi thi mo bang lenh : mongod --dbpath=/data/db
-
 
 /*
 app.get('/', function (req, res) {
@@ -302,16 +299,20 @@ app.get('/readStateFromSystem', function (req, res) {
 
 //Đọc nhiệt độ từ hệ thống 
 app.get('/temp', function (req, res) {
-    res.end(JSON.stringify(temperature));
+    res.end(JSON.stringify(temperature));		//return JSON contains value of temperature for customer (return directly on website)
 });
-app.get('/humid', function (req, res) {
-    res.end(JSON.stringify(humid));
+    											
+app.get('/humid', function (req, res) {		
+    res.end(JSON.stringify(humid));				//return JSON contains value of humid for customer (return directly on website)
 });
 app.get('/gas', function (req, res) {
     res.end(JSON.stringify(gasDetection));
 });
+
+//route get from NodeMCU arduino code
+//function sendDataFromSensorToInternet
 app.get('/readTempFromSystem', function (req, res) {
-    temperature = req.query.temperature;
+    temperature = req.query.temperature;					
 });
 app.get('/readHumidFromSystem', function (req, res) {
     humid = req.query.humid;
