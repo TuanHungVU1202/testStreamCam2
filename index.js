@@ -28,8 +28,8 @@ app.use(bodyParser.json());
 
 
 
-var temperature = 30;
-var humid = 40;
+var temperature = 21;
+var humid = 11;
 var gasDetection = "NO";
 var humanDetection = "NO";
 var securityStatus = "UNARMED";
@@ -40,7 +40,7 @@ var Power = 0;
 //details at https://www.w3schools.com/jsref/jsref_obj_date.asp
 var d1 = new Date();
 dateNow =  d1.getDate();
-monthNow = d1.getMonth() + 1;
+monthNow = d1.getMonth() + 1;	//return value from 0 so must plus 1
 yearNow =  d1.getFullYear();
 var dateFilter = dateNow;
 var monthFilter = monthNow;
@@ -97,19 +97,25 @@ function FetchData(){
 }
 */
 
-//connect to mongoDb using mLab
+//connect mongoDb using mLab
+
 MongoClient.connect(mongourl, function(err, db){
     assert.equal(null,err);
     console.log("Successfully connect MongoDB");
 
-    //projection is the object contains needed data
+//projection allows to include or exclude fields in mongoDB query
+//1 indicate including a field and 0 is excluding.
+//see https://stackoverflow.com/questions/19684757/mongodb-query-criterias-and-projections
+//and http://mongodb.github.io/node-mongodb-native/2.2/tutorials/projections/
     var projection = {
-    	"date" :1, 
-    	"year" :1,
+    	"date" :1, 	//include field "date"
+    	"year" :1,	//include field "year"
     	"month" :1, 
     	"time" :1, 
     	"P":1, 
-    	"_id":0		//"deviceID": 1,
+    	"_id":0		//exclude field "_id", use another ID
+    	//if needed, add field "deviceID" by the following line
+    	//"deviceID": 1,
     	}; 				 
     
     //db.collection('test2').insertOne({"deviceID": "D04", "date": d.getDate(), "month": d.getMonth(), "year": d.getFullYear(), "time": d.getHours() + "." + d.getMinutes(), "P": req.query.Power})
@@ -120,12 +126,16 @@ MongoClient.connect(mongourl, function(err, db){
     	month: {$eq: d.getMonth()+1},
     	year: {$eq: d.getFullYear()}
     })
+
+    //filtered data with needed field using projection
     cursor.project(projection)
+    //loop, use function doc to READ document from database with field "time", "P"
+    //use this to get the value to draw the chart
     cursor.forEach(
         function(doc) {
-            chartTime[chartCount] = doc.time;
-            chartPower[chartCount] = doc.P;
-            chartCount++;
+            chartTime[chartCount] = doc.time;	//read docs from field "time"
+            chartPower[chartCount] = doc.P;		//read docs	from field "P"
+            chartCount++;						//init chartCount=0
             console.log(doc.year);
         },
         function(err) {
@@ -215,6 +225,8 @@ app.get('/home', function (req, res) {
                 }
             ); 
         })
+
+        //render page with route /home
         res.render('home',{
             chartTime: chartTime,
             chartPower: chartPower,
@@ -224,9 +236,9 @@ app.get('/home', function (req, res) {
             humanDetection: humanDetection,
             securityStatus: securityStatus,
 
-            letterInsideGasdetectionBox : (gasDetection === "YES") ? "red": "green",
-            letterInsideHumandetectionBox: (humanDetection === "YES") ? "red": "green",
-            letterInsideSecurityBox: (securityStatus === "ARMED") ? "red": "green",
+            letterInsideGasdetectionBox : (gasDetection === "YES") ? "red": "blue",
+            letterInsideHumandetectionBox: (humanDetection === "YES") ? "red": "blue",
+            letterInsideSecurityBox: (securityStatus === "ARMED") ? "blue": "red",
         });
         
     }
@@ -244,10 +256,10 @@ app.get('/control', function (req, res) {
             device3state: (deviceState.device3 === "on") ? 'ON' : 'OFF',
             device4state: (deviceState.device4 === "on") ? 'ON' : 'OFF',
 
-            device1ButtonColor: (deviceState.device1 === "on") ? "green" : "red",
-            device2ButtonColor: (deviceState.device2 === "on") ? "green" : "red",
-            device3ButtonColor: (deviceState.device3 === "on") ? "green" : "red",
-            device4ButtonColor: (deviceState.device4 === "on") ? "green" : "red",
+            device1ButtonColor: (deviceState.device1 === "on") ? "blue" : "red",
+            device2ButtonColor: (deviceState.device2 === "on") ? "blue" : "red",
+            device3ButtonColor: (deviceState.device3 === "on") ? "blue" : "red",
+            device4ButtonColor: (deviceState.device4 === "on") ? "blue" : "red",
         })
     }
     else 
@@ -316,7 +328,7 @@ app.get('/readPowerFromSystem', function (req, res) {
     MongoClient.connect(mongourl, function(err, db){
         assert.equal(null,err);
         db.collection('test2').insertOne({
-        	"deviceID": "D04", 
+        	"deviceID": "", 
         	"date": d.getDate(), 
         	"month": d.getMonth()+1, 
         	"year": d.getFullYear(), 
@@ -388,10 +400,10 @@ app.get('/scenesjson', function (req, res) {
 app.get('/scenes', function (req, res) {
     if(loginFlag === true){
         res.render('scenes', {
-            goodmorningColor: (scenes.goodmorning === "on") ? "green" : "black",
-            iAmHomeColor: (scenes.iAmHome === "on") ? "green" : "black",
-            goodnightColor: (scenes.goodnight === "on") ? "green" : "black",
-            securityColor: (scenes.security === "on") ? "green" : "black",
+            goodmorningColor: (scenes.goodmorning === "on") ? "blue" : "green",
+            iAmHomeColor: (scenes.iAmHome === "on") ? "blue" : "green",
+            goodnightColor: (scenes.goodnight === "on") ? "blue" : "green",
+            securityColor: (scenes.security === "on") ? "blue" : "green",
         })
     }
     else 
@@ -457,9 +469,20 @@ app.get('/chart', function (req, res) {
             chartCount = 0;
             chartTime = [];
             chartPower = [];
-            var projection = {"date" :1, "year" :1,"month" :1, "time" :1, "P":1, "_id":0};
+            var projection = {
+            	"date" :1, 
+            	"year" :1,
+            	"month" :1, 
+            	"time" :1, 
+            	"P":1, 
+            	"_id":0
+            };
             var d = new Date();
-            var cursor = db.collection('test2').find({date: {$eq: dateFilter},month: {$eq: monthFilter},year: {$eq: yearFilter}  })
+            var cursor = db.collection('test2').find({
+            	date: {$eq: dateFilter},
+            	month: {$eq: monthFilter},
+            	year: {$eq: yearFilter}  
+            })
             cursor.project(projection)
             cursor.forEach(
                 function(doc) {
