@@ -47,14 +47,12 @@
             height:267px;
         }
         h1.titlesmarthome{
-            font-size: 250%;
+            color: blue;
+            font-size: 350%;
             margin-top: 1cm;
             margin-left: 3.5cm;
         }
-        div.boxDistance{
-            margin-top: 1.5cm;
-        }
-        div.box{
+                div.box{
             position: relative;
 	        text-align: center;
 	        width: 120px;
@@ -85,6 +83,9 @@
             width: 120px;
             color: {{letterInsideSecurityBox}};
         }
+        div.boxDistance{
+            margin-top: 2.0cm;
+        }
         </style>
 
         <div style = "float:left">
@@ -94,22 +95,6 @@
         <div>
             <h1 class = "titlesmarthome">SMART HOME</h1>
         </div>
-
-        <div class = "boxDistance">
-            <div class="col-xs-8 col-md-11">                     
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Live Power Consumption
-                    </div>
-                    <div class="panel-body">
-                        <div style="width:25%, height:25%">
-                            <canvas id="myChart"></canvas>
-                        </div>
-                    </div>
-                </div>            
-            </div>
-        </div>
-
 
         <div class = "boxDistance">
             <div class="col-xs-6 col-md-2">
@@ -139,7 +124,7 @@
             <div class="col-xs-6 col-md-2">
                 <div class="panel panel-default">
                     <div class="panel-body easypiechart-panel">
-                        <h4>Gas Detection</h4>
+                        <h4>Gas</h4>
                         <div class="box"><span class="letterInsideGasdetectionBox">{{gasDetection}}</span>
                         </div>
                     </div>
@@ -158,19 +143,33 @@
                 </div>
             </div>
         </div>
-
+<!--
         <div class = "boxDistance">
             <div class="col-xs-6 col-md-2">
                 <div class="panel panel-default">
                     <div class="panel-body easypiechart-panel">
-                        <h4>Security</h4>
+                        <h4>Security Status</h4>
                         <div class="box"><span class="letterInsideSecurityBox">{{securityStatus}}</span>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>                
-
+        </div> 
+-->
+        <div class = "boxDistance">
+            <div class="col-xs-8 col-md-11">                     
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Live Power Consumption
+                    </div>
+                    <div class="panel-body">
+                        <div style="width:25%, height:25%">
+                            <canvas id="myChart"></canvas>
+                        </div>
+                    </div>
+                </div>            
+            </div>
+        </div>
         
         
     </div>    
