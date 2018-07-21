@@ -98,7 +98,7 @@ function FetchData(){
 */
 
 //connect mongoDb using mLab
-
+/*
 MongoClient.connect(mongourl, function(err, db){
     assert.equal(null,err);
     console.log("Successfully connected to MongoDB");
@@ -115,22 +115,22 @@ MongoClient.connect(mongourl, function(err, db){
 //upsert: true means write new document if not yet exist. otherwise update fields
    	floor1.updateMany(
     	{"_id": "F1.1"},
-    	{$set: {"_id": "F1.1", name: "Front Light", state: "OFF"}},
+    	{$set: {"_id": "F1.1", name: "Front Light", state: "off"}},
     	{upsert: true}
     );
 	floor1.updateMany(
     	{"_id": "F1.2"},
-    	{$set: {"_id": "F1.2", name: "Stair Light", state: "OFF"}},
+    	{$set: {"_id": "F1.2", name: "Stair Light", state: "off"}},
     	{upsert: true}
     );
 	floor1.updateMany(
     	{"_id": "F1.3"},
-    	{$set: {"_id": "F1.3", name: "Air Cooler", state: "OFF"}},
+    	{$set: {"_id": "F1.3", name: "Air Cooler", state: "off"}},
     	{upsert: true}
     );
     	floor1.updateMany(
     	{"_id": "F1.4"},
-    	{$set: {"_id": "F1.4", name: "Power Tracker", state: "OFF"}},
+    	{$set: {"_id": "F1.4", name: "Power Tracker", state: "off"}},
     	{upsert: true}
     );
 /*
@@ -176,7 +176,7 @@ MongoClient.connect(mongourl, function(err, db){
             assert.equal(err, null);
             return db.close();
         }
-    );  */ 
+    );  *
 });
 
 /*
@@ -280,103 +280,143 @@ app.get('/home', function (req, res) {
 //CONTROL
 //Link with control.handlerbars, see device1ButtonColor and so on
 app.get('/control', function (req, res) {
-    if(loginFlag === true){
-    	//declare connect mongo to use with app.post devices for control page
-		MongoClient.connect(mongourl, function(err, db){
-  		//config devices for floor1
-		    var floor1 = db.collection('floor1');
+    if (loginFlag === true) {
+        //declare connect mongo to use with app.post devices for control page
+        MongoClient.connect(mongourl, function (err, db) {
+            //config devices for floor1
+            var floor1 = db.collection('floor1');
 
-		// Post ve trang thai các thiết bị
-		app.post('/device1', function (req, res) {
-		    deviceState.device1 = (deviceState.device1 === "on") ? "off" : "on";
-		    if (deviceState.device1 ==="on"){
-		    	floor1.updateMany(
-		        {"_id": "F1.1", state: "OFF"},
-		        {$set: {state: "ON"}}
-		    )}
-		    else {
-		    	floor1.updateMany(
-		        {"_id": "F1.1", state: "ON"},
-		        {$set: {state: "OFF"}},
-		    )}
-		    checkChangedFlag.changedFlagStatus = "true";
-		    res.redirect('/control');
-		});
-		app.post('/device2', function (req, res) {
-		    deviceState.device2 = (deviceState.device2 === "on") ? "off" : "on";
-		    if (deviceState.device2 ==="on"){
-		    	floor1.updateMany(
-		        {"_id": "F1.2", state: "OFF"},
-		        {$set: {state: "ON"}}
-		    )}
-		    else {
-		    	floor1.updateMany(
-		        {"_id": "F1.2", state: "ON"},
-		        {$set: {state: "OFF"}},
-		    )}
-		    checkChangedFlag.changedFlagStatus = "true";
-		    res.redirect('/control');
-		});
-		app.post('/device3', function (req, res) {
-		    deviceState.device3 = (deviceState.device3 === "on") ? "off" : "on";
-		    if (deviceState.device3 ==="on"){
-		    	floor1.updateMany(
-		        {"_id": "F1.3", state: "OFF"},
-		        {$set: {state: "ON"}}
-		    )}
-		    else {
-		    	floor1.updateMany(
-		        {"_id": "F1.3", state: "ON"},
-		        {$set: {state: "OFF"}},
-		    )}
-		    checkChangedFlag.changedFlagStatus = "true";
-		    res.redirect('/control');
-		});
-		app.post('/device4', function (req, res) {
-		    deviceState.device4 = (deviceState.device4 === "on") ? "off" : "on";
-		    if (deviceState.device4 ==="on"){
-		    	floor1.updateMany(
-		        {"_id": "F1.4", state: "OFF"},
-		        {$set: {state: "ON"}}
-		    )}
-		    else {
-		    	floor1.updateMany(
-		        {"_id": "F1.4", state: "ON"},
-		        {$set: {state: "OFF"}},
-		    )}
-		    checkChangedFlag.changedFlagStatus = "true";
-		    res.redirect('/control');
-		});
-		});
+            // Post ve trang thai các thiết bị
+            app.post('/device1', function (req, res) {
+                deviceState.device1 = (deviceState.device1 === "on") ? "off" : "on";
+                if (deviceState.device1 === "on") {
+                    floor1.updateMany(
+                        {"_id": "F1.1", state: "off"},
+                        {$set: {state: "on"}}
+                    )
+                }
+                else {
+                    floor1.updateMany(
+                        {"_id": "F1.1", state: "on"},
+                        {$set: {state: "off"}},
+                    )
+                }
+                checkChangedFlag.changedFlagStatus = "true";
+                res.redirect('/control');
+            });
+            app.post('/device2', function (req, res) {
+                deviceState.device2 = (deviceState.device2 === "on") ? "off" : "on";
+                if (deviceState.device2 === "on") {
+                    floor1.updateMany(
+                        {"_id": "F1.2", state: "off"},
+                        {$set: {state: "on"}}
+                    )
+                }
+                else {
+                    floor1.updateMany(
+                        {"_id": "F1.2", state: "on"},
+                        {$set: {state: "off"}},
+                    )
+                }
+                checkChangedFlag.changedFlagStatus = "true";
+                res.redirect('/control');
+            });
+            app.post('/device3', function (req, res) {
+                deviceState.device3 = (deviceState.device3 === "on") ? "off" : "on";
+                if (deviceState.device3 === "on") {
+                    floor1.updateMany(
+                        {"_id": "F1.3", state: "off"},
+                        {$set: {state: "on"}}
+                    )
+                }
+                else {
+                    floor1.updateMany(
+                        {"_id": "F1.3", state: "on"},
+                        {$set: {state: "off"}},
+                    )
+                }
+                checkChangedFlag.changedFlagStatus = "true";
+                res.redirect('/control');
+            });
+            app.post('/device4', function (req, res) {
+                deviceState.device4 = (deviceState.device4 === "on") ? "off" : "on";
+                if (deviceState.device4 === "on") {
+                    floor1.updateMany(
+                        {"_id": "F1.4", state: "off"},
+                        {$set: {state: "on"}}
+                    )
+                }
+                else {
+                    floor1.updateMany(
+                        {"_id": "F1.4", state: "on"},
+                        {$set: {state: "off"}},
+                    )
+                }
+                checkChangedFlag.changedFlagStatus = "true";
+                res.redirect('/control');
+            });
 
-        res.render('control', {
-            device1state: (deviceState.device1 === "on") ? 'ON' : 'OFF',
-            device2state: (deviceState.device2 === "on") ? 'ON' : 'OFF',
-            device3state: (deviceState.device3 === "on") ? 'ON' : 'OFF',
-            device4state: (deviceState.device4 === "on") ? 'ON' : 'OFF',
 
-            device1ButtonColor: (deviceState.device1 === "on") ? "blue" : "red",
-            device2ButtonColor: (deviceState.device2 === "on") ? "blue" : "red",
-            device3ButtonColor: (deviceState.device3 === "on") ? "blue" : "red",
-            device4ButtonColor: (deviceState.device4 === "on") ? "blue" : "red",
-        })
+            res.render('control', {
+                device1state: (deviceState.device1 === "on") ? 'ON' : 'OFF',
+                device2state: (deviceState.device2 === "on") ? 'ON' : 'OFF',
+                device3state: (deviceState.device3 === "on") ? 'ON' : 'OFF',
+                device4state: (deviceState.device4 === "on") ? 'ON' : 'OFF',
+
+                device1ButtonColor: (deviceState.device1 === "on") ? "blue" : "red",
+                device2ButtonColor: (deviceState.device2 === "on") ? "blue" : "red",
+                device3ButtonColor: (deviceState.device3 === "on") ? "blue" : "red",
+                device4ButtonColor: (deviceState.device4 === "on") ? "blue" : "red",
+            });
+        });
     }
-    else 
+    else
         res.redirect('/');
 });
 
 
 
 //Đọc trạng thái về từ hệ thống
+/*Problem maybe caused from here. LOOK here first if hardware does not interact with web app
+ */
 app.get('/readStateFromSystem', function (req, res) {
-    if(req.query.device1)
+    MongoClient.connect(mongourl, function(err, db){
+        var floor1 = db.collection('floor1');
+
+        //Receive state from System by Internet
+    if(req.query.device1){
         deviceState.device1 = req.query.device1;
-    if(req.query.device2)
+        floor1.updateMany(
+            {"_id": "F1.1"},
+            {$set: {"_id": "F1.1", name: "Front Light", state: deviceState.device1}},
+            {upsert: true}
+            );
+    }
+    if(req.query.device2){
         deviceState.device2 = req.query.device2;
-    if(req.query.device3)
+        floor1.updateMany(
+            {"_id": "F1.2"},
+            {$set: {"_id": "F1.2", name: "Stair Light", state: req.query.device2}},
+            {upsert: true}
+            );
+    }
+    if(req.query.device3){
         deviceState.device3 = req.query.device3;
-    if(req.query.device4)
+        floor1.updateMany(
+            {"_id": "F1.3"},
+            {$set: {"_id": "F1.3", name: "Air Cooler", state: req.query.device3}},
+            {upsert: true}
+            );
+    }
+    if(req.query.device4){
         deviceState.device4 = req.query.device4;
+        floor1.updateMany(
+            {"_id": "F1.4"},
+            {$set: {"_id": "F1.4", name: "Power Tracker", state: req.query.device4}},
+            {upsert: true}
+            );
+        }
+    });
 });
 
 //Đọc nhiệt độ từ hệ thống 
@@ -481,59 +521,101 @@ app.get('/scenesjson', function (req, res) {
 });
 
 app.get('/scenes', function (req, res) {
-    if(loginFlag === true){
-        res.render('scenes', {
-            goodmorningColor: (scenes.goodmorning === "on") ? "blue" : "green",
-            iAmHomeColor: (scenes.iAmHome === "on") ? "blue" : "green",
-            goodnightColor: (scenes.goodnight === "on") ? "blue" : "green",
-            securityColor: (scenes.security === "on") ? "blue" : "green",
-        })
+    if(loginFlag === true) {
+        MongoClient.connect(mongourl, function (err, db) {
+            //config devices for floor1
+            var floor1 = db.collection('floor1');
+
+            //Gui scenes
+            app.post('/goodmorning', function (req, res) {
+                scenes.goodmorning = (scenes.goodmorning === "on") ? "off" : "on";
+                scenes.iAmHome = "off";
+                scenes.goodnight = "off";
+                scenes.security = "off";
+                //updateMany for updating database
+                floor1.updateMany(
+                    {"_id": "F1.1"},
+                    {$set: {state: "on"}}
+                )
+                floor1.updateMany(
+                    {"_id": "F1.2"},
+                    {$set: {state: "on"}}
+                )
+                floor1.updateMany(
+                    {"_id": "F1.3"},
+                    {$set: {state: "off"}}
+                )
+                //deviceState for updating button control in Control page
+                deviceState.device1 = "on";
+                deviceState.device2 = "on";
+                deviceState.device3 = "off";
+                checkChangedFlag.changedFlagStatus = "true";
+                res.redirect('/scenes');
+            });
+            app.post('/iamhome', function (req, res) {
+                scenes.iAmHome = (scenes.iAmHome === "on") ? "off" : "on";
+                scenes.goodmorning = "off";
+                scenes.goodnight = "off";
+                scenes.security = "off";
+                floor1.updateMany(
+                    {"_id": "F1.1"},
+                    {$set: {state: "on"}}
+                )
+                floor1.updateMany(
+                    {"_id": "F1.2"},
+                    {$set: {state: "on"}}
+                )
+                floor1.updateMany(
+                    {"_id": "F1.3"},
+                    {$set: {state: "on"}}
+                )
+                deviceState.device1 = "on";
+                deviceState.device2 = "on";
+                deviceState.device3 = "on";
+                checkChangedFlag.changedFlagStatus = "true";
+                res.redirect('/scenes');
+            });
+            app.post('/goodnight', function (req, res) {
+                scenes.goodnight = (scenes.goodnight === "on") ? "off" : "on";
+                scenes.goodmorning = "off";
+                scenes.iAmHome = "off";
+                scenes.security = "off";
+                floor1.updateMany(
+                    {"_id": "F1.1"},
+                    {$set: {state: "off"}}
+                )
+                floor1.updateMany(
+                    {"_id": "F1.2"},
+                    {$set: {state: "off"}}
+                )
+                floor1.updateMany(
+                    {"_id": "F1.3"},
+                    {$set: {state: "off"}}
+                )
+                deviceState.device1 = "off";
+                deviceState.device2 = "off";
+                deviceState.device3 = "off";
+                checkChangedFlag.changedFlagStatus = "true";
+                res.redirect('/scenes');
+            });
+            app.post('/security', function (req, res) {
+                scenes.security = (scenes.security === "on") ? "off" : "on";
+                scenes.goodmorning = "off";
+                scenes.iAmHome = "off";
+                scenes.goodnight = "off";
+                res.redirect('/scenes');
+            });
+            res.render('scenes', {
+                goodmorningColor: (scenes.goodmorning === "on") ? "blue" : "green",
+                iAmHomeColor: (scenes.iAmHome === "on") ? "blue" : "green",
+                goodnightColor: (scenes.goodnight === "on") ? "blue" : "green",
+                securityColor: (scenes.security === "on") ? "blue" : "green",
+            });
+        });
     }
     else 
         res.redirect('/');
 });
-//Gui scenes
-app.post('/goodmorning', function (req, res) {
-    scenes.goodmorning = (scenes.goodmorning === "on") ? "off" : "on";
-    scenes.iAmHome = "off";
-    scenes.goodnight = "off";
-    scenes.security = "off";
-    deviceState.device1 = "on";
-    deviceState.device2 = "on";
-    deviceState.device3 = "off";
-    checkChangedFlag.changedFlagStatus = "true";
-    res.redirect('/scenes');
-});
-app.post('/iamhome', function (req, res) {
-    scenes.iAmHome = (scenes.iAmHome === "on") ? "off" : "on";
-    scenes.goodmorning = "off";
-    scenes.goodnight = "off";
-    scenes.security = "off";
-    deviceState.device1 = "on";
-    deviceState.device2 = "on";
-    deviceState.device3 = "on";
-    checkChangedFlag.changedFlagStatus = "true";
-    res.redirect('/scenes');
-});
-app.post('/goodnight', function (req, res) {
-    scenes.goodnight = (scenes.goodnight === "on") ? "off" : "on";
-    scenes.goodmorning = "off";
-    scenes.iAmHome = "off";
-    scenes.security = "off";
-    deviceState.device1 = "off";
-    deviceState.device2 = "off";
-    deviceState.device3 = "off";
-    checkChangedFlag.changedFlagStatus = "true";
-    res.redirect('/scenes');
-});
-app.post('/security', function (req, res) {
-    scenes.security = (scenes.security === "on") ? "off" : "on";
-    scenes.goodmorning = "off";
-    scenes.iAmHome = "off";
-    scenes.goodnight = "off";
-    res.redirect('/scenes');
-});
-
 
 
 app.get('/camera', function (req, res) {
