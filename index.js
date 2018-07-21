@@ -4,7 +4,7 @@ var pug = require('pug');
 var exphbs  = require('express-handlebars');
 var fetch = require('node-fetch');
 var bodyParser = require('body-parser');
-
+var mongoConfig = require ('./mongoConfig');
 
 var port = process.env.PORT || 2111
 app.listen(port, function() {
@@ -101,19 +101,53 @@ function FetchData(){
 
 MongoClient.connect(mongourl, function(err, db){
     assert.equal(null,err);
-    console.log("Successfully connect MongoDB");
+    console.log("Successfully connected to MongoDB");
 
-//projection allows to include or exclude fields in mongoDB query
-//1 indicate including a field and 0 is excluding.
-//see https://stackoverflow.com/questions/19684757/mongodb-query-criterias-and-projections
-//and http://mongodb.github.io/node-mongodb-native/2.2/tutorials/projections/
-    var projection = {
-    	"date" :1, 	//include field "date"
-    	"year" :1,	//include field "year"
+//config devices for floor1
+    var floor1 = db.collection('floor1');
+    //below var device is useless but still keep it for clearer view of devices in DB
+	var device = [
+        {"_id": "F1.1", name: "Front Light", state: "OFF"},
+        {"_id": "F1.2", name: "Stair Light", state: "OFF"},
+        {"_id": "F1.3", name: "Air Cooler", state: "OFF"},
+        {"_id": "F1.4", name: "Power Tracker", state: "OFF"}
+    ];
+//upsert: true means write new document if not yet exist. otherwise update fields
+   	floor1.updateMany(
+    	{"_id": "F1.1"},
+    	{$set: {"_id": "F1.1", name: "Front Light", state: "OFF"}},
+    	{upsert: true}
+    );
+	floor1.updateMany(
+    	{"_id": "F1.2"},
+    	{$set: {"_id": "F1.2", name: "Stair Light", state: "OFF"}},
+    	{upsert: true}
+    );
+	floor1.updateMany(
+    	{"_id": "F1.3"},
+    	{$set: {"_id": "F1.3", name: "Air Cooler", state: "OFF"}},
+    	{upsert: true}
+    );
+    	floor1.updateMany(
+    	{"_id": "F1.4"},
+    	{$set: {"_id": "F1.4", name: "Power Tracker", state: "OFF"}},
+    	{upsert: true}
+    );
+/*
+	projection allows to include or exclude fields in mongoDB query
+	1 indicate including a field and 0 is excluding.
+	=> include field "date", "year", "month", "time", "P"
+	=> exclude field "_id"
+	see https://stackoverflow.com/questions/19684757/mongodb-query-criterias-and-projections
+	and http://mongodb.github.io/node-mongodb-native/2.2/tutorials/projections/
+*/
+/*    var projection = {
+    	"date" :1, 	
+    	"year" :1,	
     	"month" :1, 
     	"time" :1, 
     	"P":1, 
-    	"_id":0		//exclude field "_id", use another ID
+    	"_id":0		
     	//if needed, add field "deviceID" by the following line
     	//"deviceID": 1,
     	}; 				 
@@ -142,7 +176,7 @@ MongoClient.connect(mongourl, function(err, db){
             assert.equal(err, null);
             return db.close();
         }
-    );   
+    );  */ 
 });
 
 /*
@@ -247,6 +281,74 @@ app.get('/home', function (req, res) {
 //Link with control.handlerbars, see device1ButtonColor and so on
 app.get('/control', function (req, res) {
     if(loginFlag === true){
+    	//declare connect mongo to use with app.post devices for control page
+		MongoClient.connect(mongourl, function(err, db){
+  		//config devices for floor1
+		    var floor1 = db.collection('floor1');
+
+		// Post ve trang thai các thiết bị
+		app.post('/device1', function (req, res) {
+		    deviceState.device1 = (deviceState.device1 === "on") ? "off" : "on";
+		    if (deviceState.device1 ==="on"){
+		    	floor1.updateMany(
+		        {"_id": "F1.1", state: "OFF"},
+		        {$set: {state: "ON"}}
+		    )}
+		    else {
+		    	floor1.updateMany(
+		        {"_id": "F1.1", state: "ON"},
+		        {$set: {state: "OFF"}},
+		    )}
+		    checkChangedFlag.changedFlagStatus = "true";
+		    res.redirect('/control');
+		});
+		app.post('/device2', function (req, res) {
+		    deviceState.device2 = (deviceState.device2 === "on") ? "off" : "on";
+		    if (deviceState.device2 ==="on"){
+		    	floor1.updateMany(
+		        {"_id": "F1.2", state: "OFF"},
+		        {$set: {state: "ON"}}
+		    )}
+		    else {
+		    	floor1.updateMany(
+		        {"_id": "F1.2", state: "ON"},
+		        {$set: {state: "OFF"}},
+		    )}
+		    checkChangedFlag.changedFlagStatus = "true";
+		    res.redirect('/control');
+		});
+		app.post('/device3', function (req, res) {
+		    deviceState.device3 = (deviceState.device3 === "on") ? "off" : "on";
+		    if (deviceState.device3 ==="on"){
+		    	floor1.updateMany(
+		        {"_id": "F1.3", state: "OFF"},
+		        {$set: {state: "ON"}}
+		    )}
+		    else {
+		    	floor1.updateMany(
+		        {"_id": "F1.3", state: "ON"},
+		        {$set: {state: "OFF"}},
+		    )}
+		    checkChangedFlag.changedFlagStatus = "true";
+		    res.redirect('/control');
+		});
+		app.post('/device4', function (req, res) {
+		    deviceState.device4 = (deviceState.device4 === "on") ? "off" : "on";
+		    if (deviceState.device4 ==="on"){
+		    	floor1.updateMany(
+		        {"_id": "F1.4", state: "OFF"},
+		        {$set: {state: "ON"}}
+		    )}
+		    else {
+		    	floor1.updateMany(
+		        {"_id": "F1.4", state: "ON"},
+		        {$set: {state: "OFF"}},
+		    )}
+		    checkChangedFlag.changedFlagStatus = "true";
+		    res.redirect('/control');
+		});
+		});
+
         res.render('control', {
             device1state: (deviceState.device1 === "on") ? 'ON' : 'OFF',
             device2state: (deviceState.device2 === "on") ? 'ON' : 'OFF',
@@ -263,27 +365,7 @@ app.get('/control', function (req, res) {
         res.redirect('/');
 });
 
-// Post ve trang thai các thiết bị
-app.post('/device1', function (req, res) {
-    deviceState.device1 = (deviceState.device1 === "on") ? "off" : "on";
-    checkChangedFlag.changedFlagStatus = "true";
-    res.redirect('/control');
-});
-app.post('/device2', function (req, res) {
-    deviceState.device2 = (deviceState.device2 === "on") ? "off" : "on";
-    checkChangedFlag.changedFlagStatus = "true";
-    res.redirect('/control');
-});
-app.post('/device3', function (req, res) {
-    deviceState.device3 = (deviceState.device3 === "on") ? "off" : "on";
-    checkChangedFlag.changedFlagStatus = "true";
-    res.redirect('/control');
-});
-app.post('/device4', function (req, res) {
-    deviceState.device4 = (deviceState.device4 === "on") ? "off" : "on";
-    checkChangedFlag.changedFlagStatus = "true";
-    res.redirect('/control');
-});
+
 
 //Đọc trạng thái về từ hệ thống
 app.get('/readStateFromSystem', function (req, res) {
