@@ -62,11 +62,12 @@ checkChangedFlag.changedFlagStatus = "false";
 
 //init states for devices
 var deviceState = {};
+/*
 deviceState.device1 = "off";
 deviceState.device2 = "off";
 deviceState.device3 = "off";
 deviceState.device4 = "off";
-
+*/
 deviceState.device1TimeOn = "00:00";
 deviceState.device1TimeOff = "00:00";
 deviceState.device2TimeOn = "00:00";
@@ -82,108 +83,7 @@ scenes.iAmHome = "off";
 scenes.goodmorning = "off";
 scenes.goodnight = "off";
 scenes.security = "off";
-//var mongourl = 'mongodb://localhost:27017//video';
-/*
-// Fetch data
-function FetchData(){
-    fetch('http://192.168.122.26/mrbs_sourcecode/API/Demo/APIController.php')
-        .then(function(res) {
-            return res.json();
-        }).then(function(json) {
-            a = json.API[0].id;
-            console.log(a);
-        })
 
-}
-*/
-
-//connect mongoDb using mLab
-/*
-MongoClient.connect(mongourl, function(err, db){
-    assert.equal(null,err);
-    console.log("Successfully connected to MongoDB");
-
-//config devices for floor1
-    var floor1 = db.collection('floor1');
-    //below var device is useless but still keep it for clearer view of devices in DB
-	var device = [
-        {"_id": "F1.1", name: "Front Light", state: "OFF"},
-        {"_id": "F1.2", name: "Stair Light", state: "OFF"},
-        {"_id": "F1.3", name: "Air Cooler", state: "OFF"},
-        {"_id": "F1.4", name: "Power Tracker", state: "OFF"}
-    ];
-//upsert: true means write new document if not yet exist. otherwise update fields
-   	floor1.updateMany(
-    	{"_id": "F1.1"},
-    	{$set: {"_id": "F1.1", name: "Front Light", state: "off"}},
-    	{upsert: true}
-    );
-	floor1.updateMany(
-    	{"_id": "F1.2"},
-    	{$set: {"_id": "F1.2", name: "Stair Light", state: "off"}},
-    	{upsert: true}
-    );
-	floor1.updateMany(
-    	{"_id": "F1.3"},
-    	{$set: {"_id": "F1.3", name: "Air Cooler", state: "off"}},
-    	{upsert: true}
-    );
-    	floor1.updateMany(
-    	{"_id": "F1.4"},
-    	{$set: {"_id": "F1.4", name: "Power Tracker", state: "off"}},
-    	{upsert: true}
-    );
-/*
-	projection allows to include or exclude fields in mongoDB query
-	1 indicate including a field and 0 is excluding.
-	=> include field "date", "year", "month", "time", "P"
-	=> exclude field "_id"
-	see https://stackoverflow.com/questions/19684757/mongodb-query-criterias-and-projections
-	and http://mongodb.github.io/node-mongodb-native/2.2/tutorials/projections/
-*/
-/*    var projection = {
-    	"date" :1, 	
-    	"year" :1,	
-    	"month" :1, 
-    	"time" :1, 
-    	"P":1, 
-    	"_id":0		
-    	//if needed, add field "deviceID" by the following line
-    	//"deviceID": 1,
-    	}; 				 
-    
-    //db.collection('test2').insertOne({"deviceID": "D04", "date": d.getDate(), "month": d.getMonth(), "year": d.getFullYear(), "time": d.getHours() + "." + d.getMinutes(), "P": req.query.Power})
-    var d = new Date();
-    var cursor = db.collection('test2').find({
-    	time: {$gt: '1.20'},			//select TIME where value of "time" is greater than "1.2"
-    	date: {$eq: d.getDate()},		//select DATE where value of "date" equal to returned value from getDate method.
-    	month: {$eq: d.getMonth()+1},
-    	year: {$eq: d.getFullYear()}
-    })
-
-    //filtered data with needed field using projection
-    cursor.project(projection)
-    //for each document in the cursor, apply the function(doc)
-    //use this to get the value to draw the chart
-    cursor.forEach(
-        function(doc) {
-            chartTime[chartCount] = doc.time;	//read docs from field "time"
-            chartPower[chartCount] = doc.P;		//read docs	from field "P"
-            chartCount++;						//init chartCount=0
-            console.log(doc.year);
-        },
-        function(err) {
-            assert.equal(err, null);
-            return db.close();
-        }
-    );  *
-});
-
-/*
-app.get('/', function (req, res) {
-    res.render('index', { title: 'Hey', message: 'Hello there!',info: a})
-});
-*/
 
 app.get('/', function (req, res) {
     //console.log(chartTime);
@@ -396,7 +296,7 @@ app.get('/readStateFromSystem', function (req, res) {
         deviceState.device2 = req.query.device2;
         floor1.updateMany(
             {"_id": "F1.2"},
-            {$set: {"_id": "F1.2", name: "Stair Light", state: req.query.device2}},
+            {$set: {"_id": "F1.2", name: "Stair Light", state: deviceState.device2}},
             {upsert: true}
             );
     }
@@ -404,7 +304,7 @@ app.get('/readStateFromSystem', function (req, res) {
         deviceState.device3 = req.query.device3;
         floor1.updateMany(
             {"_id": "F1.3"},
-            {$set: {"_id": "F1.3", name: "Air Cooler", state: req.query.device3}},
+            {$set: {"_id": "F1.3", name: "Air Cooler", state: deviceState.device3}},
             {upsert: true}
             );
     }
@@ -412,7 +312,7 @@ app.get('/readStateFromSystem', function (req, res) {
         deviceState.device4 = req.query.device4;
         floor1.updateMany(
             {"_id": "F1.4"},
-            {$set: {"_id": "F1.4", name: "Power Tracker", state: req.query.device4}},
+            {$set: {"_id": "F1.4", name: "Power Tracker", state: deviceState.device4}},
             {upsert: true}
             );
         }
@@ -606,10 +506,10 @@ app.get('/scenes', function (req, res) {
                 res.redirect('/scenes');
             });
             res.render('scenes', {
-                goodmorningColor: (scenes.goodmorning === "on") ? "blue" : "green",
-                iAmHomeColor: (scenes.iAmHome === "on") ? "blue" : "green",
-                goodnightColor: (scenes.goodnight === "on") ? "blue" : "green",
-                securityColor: (scenes.security === "on") ? "blue" : "green",
+                goodmorningColor: (scenes.goodmorning === "on") ? "blue" : "red",
+                iAmHomeColor: (scenes.iAmHome === "on") ? "blue" : "red",
+                goodnightColor: (scenes.goodnight === "on") ? "blue" : "red",
+                securityColor: (scenes.security === "on") ? "blue" : "red",
             });
         });
     }
@@ -684,4 +584,107 @@ app.get('/filterPower', function (req, res) {
 });
 
 
+
+//var mongourl = 'mongodb://localhost:27017//video';
+/*
+// Fetch data
+function FetchData(){
+    fetch('http://192.168.122.26/mrbs_sourcecode/API/Demo/APIController.php')
+        .then(function(res) {
+            return res.json();
+        }).then(function(json) {
+            a = json.API[0].id;
+            console.log(a);
+        })
+
+}
+*/
+
+//connect mongoDb using mLab
+/*
+MongoClient.connect(mongourl, function(err, db){
+    assert.equal(null,err);
+    console.log("Successfully connected to MongoDB");
+
+//config devices for floor1
+    var floor1 = db.collection('floor1');
+    //below var device is useless but still keep it for clearer view of devices in DB
+	var device = [
+        {"_id": "F1.1", name: "Front Light", state: "OFF"},
+        {"_id": "F1.2", name: "Stair Light", state: "OFF"},
+        {"_id": "F1.3", name: "Air Cooler", state: "OFF"},
+        {"_id": "F1.4", name: "Power Tracker", state: "OFF"}
+    ];
+//upsert: true means write new document if not yet exist. otherwise update fields
+   	floor1.updateMany(
+    	{"_id": "F1.1"},
+    	{$set: {"_id": "F1.1", name: "Front Light", state: "off"}},
+    	{upsert: true}
+    );
+	floor1.updateMany(
+    	{"_id": "F1.2"},
+    	{$set: {"_id": "F1.2", name: "Stair Light", state: "off"}},
+    	{upsert: true}
+    );
+	floor1.updateMany(
+    	{"_id": "F1.3"},
+    	{$set: {"_id": "F1.3", name: "Air Cooler", state: "off"}},
+    	{upsert: true}
+    );
+    	floor1.updateMany(
+    	{"_id": "F1.4"},
+    	{$set: {"_id": "F1.4", name: "Power Tracker", state: "off"}},
+    	{upsert: true}
+    );
+/*
+	projection allows to include or exclude fields in mongoDB query
+	1 indicate including a field and 0 is excluding.
+	=> include field "date", "year", "month", "time", "P"
+	=> exclude field "_id"
+	see https://stackoverflow.com/questions/19684757/mongodb-query-criterias-and-projections
+	and http://mongodb.github.io/node-mongodb-native/2.2/tutorials/projections/
+*/
+/*    var projection = {
+    	"date" :1,
+    	"year" :1,
+    	"month" :1,
+    	"time" :1,
+    	"P":1,
+    	"_id":0
+    	//if needed, add field "deviceID" by the following line
+    	//"deviceID": 1,
+    	};
+
+    //db.collection('test2').insertOne({"deviceID": "D04", "date": d.getDate(), "month": d.getMonth(), "year": d.getFullYear(), "time": d.getHours() + "." + d.getMinutes(), "P": req.query.Power})
+    var d = new Date();
+    var cursor = db.collection('test2').find({
+    	time: {$gt: '1.20'},			//select TIME where value of "time" is greater than "1.2"
+    	date: {$eq: d.getDate()},		//select DATE where value of "date" equal to returned value from getDate method.
+    	month: {$eq: d.getMonth()+1},
+    	year: {$eq: d.getFullYear()}
+    })
+
+    //filtered data with needed field using projection
+    cursor.project(projection)
+    //for each document in the cursor, apply the function(doc)
+    //use this to get the value to draw the chart
+    cursor.forEach(
+        function(doc) {
+            chartTime[chartCount] = doc.time;	//read docs from field "time"
+            chartPower[chartCount] = doc.P;		//read docs	from field "P"
+            chartCount++;						//init chartCount=0
+            console.log(doc.year);
+        },
+        function(err) {
+            assert.equal(err, null);
+            return db.close();
+        }
+    );  *
+});
+
+/*
+app.get('/', function (req, res) {
+    res.render('index', { title: 'Hey', message: 'Hello there!',info: a})
+});
+*/
 
