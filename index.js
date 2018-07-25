@@ -4,17 +4,22 @@ var pug = require('pug');
 var exphbs  = require('express-handlebars');
 var fetch = require('node-fetch');
 var bodyParser = require('body-parser');
-var mongoConfig = require ('./mongoConfig');
+
+//var mongoConfig = require ('./mongoConfig');
 
 var port = process.env.PORT || 2111
 app.listen(port, function() {
     console.log("App is running on port " + port);
 });
 
-//mongodb tren mlab
+//mongodb on mlab
 var mongourl= 'mongodb://admin:admin123@ds139942.mlab.com:39942/mongotest-1';
-//khai bao cho mongodb
+//declare for mongodb
 var MongoClient = require('mongodb').MongoClient;
+
+//setup socket.io
+const client = require('socket.io').listen(1202).sockets;
+
 assert = require('assert');
 
 const path = require('path');
@@ -274,110 +279,6 @@ app.get('/control', function (req, res) {
         res.redirect('/');
 });
 
-
-
-//Đọc trạng thái về từ hệ thống
-/*Problem maybe caused from here. LOOK here first if hardware does not interact with web app
- */
-app.get('/readStateFromSystem', function (req, res) {
-    MongoClient.connect(mongourl, function(err, db){
-        var floor1 = db.collection('floor1');
-
-        //Receive state from System by Internet
-    if(req.query.device1){
-        deviceState.device1 = req.query.device1;
-        floor1.updateMany(
-            {"_id": "F1.1"},
-            {$set: {"_id": "F1.1", name: "Front Light", state: deviceState.device1}},
-            {upsert: true}
-            );
-    }
-    if(req.query.device2){
-        deviceState.device2 = req.query.device2;
-        floor1.updateMany(
-            {"_id": "F1.2"},
-            {$set: {"_id": "F1.2", name: "Stair Light", state: deviceState.device2}},
-            {upsert: true}
-            );
-    }
-    if(req.query.device3){
-        deviceState.device3 = req.query.device3;
-        floor1.updateMany(
-            {"_id": "F1.3"},
-            {$set: {"_id": "F1.3", name: "Air Cooler", state: deviceState.device3}},
-            {upsert: true}
-            );
-    }
-    if(req.query.device4){
-        deviceState.device4 = req.query.device4;
-        floor1.updateMany(
-            {"_id": "F1.4"},
-            {$set: {"_id": "F1.4", name: "Power Tracker", state: deviceState.device4}},
-            {upsert: true}
-            );
-        }
-    });
-});
-
-//Đọc nhiệt độ từ hệ thống 
-app.get('/temp', function (req, res) {
-    res.end(JSON.stringify(temperature));		//return JSON contains value of temperature for customer (return directly on website)
-});
-    											
-app.get('/humid', function (req, res) {		
-    res.end(JSON.stringify(humid));				//return JSON contains value of humid for customer (return directly on website)
-});
-app.get('/gas', function (req, res) {
-    res.end(JSON.stringify(gasDetection));
-});
-
-//route get from NodeMCU arduino code
-//function sendDataFromSensorToInternet
-app.get('/readTempFromSystem', function (req, res) {
-    temperature = req.query.temperature;					
-});
-app.get('/readHumidFromSystem', function (req, res) {
-    humid = req.query.humid;
-});
-app.get('/readGasFromSystem', function (req, res) {
-    gasDetection = req.query.gasDetection;
-});
-app.get('/readHumanFromSystem', function (req, res) {
-    humanDetection = req.query.humanDetection;
-});
-app.get('/readPowerFromSystem', function (req, res) {
-    var d = new Date();
-    Power = req.query.Power;
-    MongoClient.connect(mongourl, function(err, db){
-        assert.equal(null,err);
-        db.collection('test2').insertOne({
-        	"deviceID": "", 
-        	"date": d.getDate(), 
-        	"month": d.getMonth()+1, 
-        	"year": d.getFullYear(), 
-        	"time": d.getHours() + "." + d.getMinutes(), 
-        	"P": req.query.Power
-        })
-    });
-});
-
-app.get('/Power', function (req, res) {
-    res.end(JSON.stringify(Power));
-});
-
-//Trang Json trạng thái các thiết bị
-app.get('/state', function (req, res) {
-    res.end(JSON.stringify(deviceState));
-});
-
-
-app.get('/checkChangedFlag', function(req,res){
-    if(req.query.device === "NodeMCU"){
-        checkChangedFlag.changedFlagStatus = "false";
-    }
-    res.end(JSON.stringify(checkChangedFlag));
-});
-
 //Trang hẹn giờ
 app.get('/submitTheTimeDevice1', function(req,res){
    deviceState.device1TimeOn = req.query.setTimeOn;
@@ -403,16 +304,6 @@ app.get('/submitTheTimeDevice4', function(req,res){
     checkChangedFlag.changedFlagStatus = "true";
     res.redirect('/control');
 });
-/*
-app.get('/process_get', function (req, res) {
-   response = {
-      first_name:req.query.first_name,
-   };
-   a = req.query.first_name;
-   console.log(response);
-   res.end(JSON.stringify(response));
-});
-*/
 
 
 //SCENES
@@ -518,15 +409,7 @@ app.get('/scenes', function (req, res) {
 });
 
 
-app.get('/camera', function (req, res) {
-    if(loginFlag === true){
-        res.render('camera');
-    }
-    else
-        res.redirect('/');
-
-});
-
+//CHART
 app.get('/chart', function (req, res) {
     if(loginFlag === true){
         MongoClient.connect(mongourl, function(err, db){
@@ -535,18 +418,18 @@ app.get('/chart', function (req, res) {
             chartTime = [];
             chartPower = [];
             var projection = {
-            	"date" :1, 
-            	"year" :1,
-            	"month" :1, 
-            	"time" :1, 
-            	"P":1, 
-            	"_id":0
+                "date" :1, 
+                "year" :1,
+                "month" :1, 
+                "time" :1, 
+                "P":1, 
+                "_id":0
             };
             var d = new Date();
             var cursor = db.collection('test2').find({
-            	date: {$eq: dateFilter},
-            	month: {$eq: monthFilter},
-            	year: {$eq: yearFilter}  
+                date: {$eq: dateFilter},
+                month: {$eq: monthFilter},
+                year: {$eq: yearFilter}  
             })
             cursor.project(projection)
             cursor.forEach(
@@ -574,6 +457,7 @@ app.get('/chart', function (req, res) {
         res.redirect('/');
 });
 
+//Filter wanted values in CHART page
 app.get('/filterPower', function (req, res) {
     var a = req.query.chartChooseMonth + " " + req.query.chartChooseDate + " " + req.query.chartChooseYear;
     var b = new Date(a);
@@ -582,6 +466,205 @@ app.get('/filterPower', function (req, res) {
     yearFilter = b.getFullYear();
     res.redirect('/chart');
 });
+
+
+//CAMERA
+app.get('/camera', function (req, res) {
+    if(loginFlag === true){
+        res.render('camera');
+    }
+    else
+        res.redirect('/');
+
+});
+
+
+//CHAT page using NodeJs, MongoDB and Socket.io
+app.get('/chat', function(req, res){
+    if (loginFlag === true){
+        //res.render('chat');
+        MongoClient.connect(mongourl, function (err, db) {
+            if(err){
+                throw err;
+            }
+            //res.render('chat');
+            //var chats = db.collection('chats');
+            //connect to socket.io. USE client.ONCE to avoid duplicate message on client site
+            client.once('connection', function(socket){
+                //socket.removeAllListeners();
+                var chats = db.collection('chats');
+
+                //create func to send status
+                sendStatus = function(s){
+                    socket.emit('status',s);
+                }
+                //access chats in mongoDB
+                chats.find().limit(100).sort({_id:1}).toArray(function (err, res){
+                    if(err){
+                        throw err;
+                    }
+                    // Emit messages
+                    socket.emit('output',res);
+                });
+
+                //handle input events
+                socket.on('input', function (data) {
+                  var name = data.name;
+                  var message = data.message;
+
+                  //check for name and message if they are blanked
+                    if(name == '' || message == ''){
+                        //send error status
+                        sendStatus('Please enter at least one name or message');
+                    }
+                    else{
+                        //insert message to mongodb or so called : send message
+                        chats.insert({name: name, message: message}, function () {
+                            client.emit('output', [data]);
+
+                            //send status back
+                            sendStatus({
+                                message: 'Message sent',
+                                clear: true
+                            });
+                        });
+                    } //else bracket
+                });
+
+                // Handle clear
+                socket.on('clear', function (data) {
+                   //Remove all chats from collection of mongoDB
+                   chats.remove({}, function () {
+                       //emit cleared
+                       socket.emit('cleared');
+                   });
+                });
+            }); //bracket of client.on
+        });     //bracket of mongo
+        res.render('chat');
+    }
+    else
+        res.redirect('/');
+
+});
+//Đọc trạng thái về từ hệ thống
+/*Problem maybe caused from here. LOOK here first if hardware does not interact with web app
+ */
+app.get('/readStateFromSystem', function (req, res) {
+    MongoClient.connect(mongourl, function(err, db){
+        var floor1 = db.collection('floor1');
+
+        //Receive state from System by Internet
+    if(req.query.device1){
+        deviceState.device1 = req.query.device1;
+        floor1.updateMany(
+            {"_id": "F1.1"},
+            {$set: {"_id": "F1.1", name: "Front Light", state: deviceState.device1}},
+            {upsert: true}
+            );
+    }
+    if(req.query.device2){
+        deviceState.device2 = req.query.device2;
+        floor1.updateMany(
+            {"_id": "F1.2"},
+            {$set: {"_id": "F1.2", name: "Stair Light", state: deviceState.device2}},
+            {upsert: true}
+            );
+    }
+    if(req.query.device3){
+        deviceState.device3 = req.query.device3;
+        floor1.updateMany(
+            {"_id": "F1.3"},
+            {$set: {"_id": "F1.3", name: "Air Cooler", state: deviceState.device3}},
+            {upsert: true}
+            );
+    }
+    if(req.query.device4){
+        deviceState.device4 = req.query.device4;
+        floor1.updateMany(
+            {"_id": "F1.4"},
+            {$set: {"_id": "F1.4", name: "Power Tracker", state: deviceState.device4}},
+            {upsert: true}
+            );
+        }
+    });
+});
+
+//Đọc nhiệt độ từ hệ thống 
+app.get('/temp', function (req, res) {
+    res.end(JSON.stringify(temperature));		//return JSON contains value of temperature for customer (return directly on website)
+});
+    											
+app.get('/humid', function (req, res) {		
+    res.end(JSON.stringify(humid));				//return JSON contains value of humid for customer (return directly on website)
+});
+app.get('/gas', function (req, res) {
+    res.end(JSON.stringify(gasDetection));
+});
+
+//route get from NodeMCU arduino code
+//function sendDataFromSensorToInternet
+app.get('/readTempFromSystem', function (req, res) {
+    temperature = req.query.temperature;					
+});
+app.get('/readHumidFromSystem', function (req, res) {
+    humid = req.query.humid;
+});
+app.get('/readGasFromSystem', function (req, res) {
+    gasDetection = req.query.gasDetection;
+});
+app.get('/readHumanFromSystem', function (req, res) {
+    humanDetection = req.query.humanDetection;
+});
+app.get('/readPowerFromSystem', function (req, res) {
+    var d = new Date();
+    Power = req.query.Power;
+    MongoClient.connect(mongourl, function(err, db){
+        assert.equal(null,err);
+        db.collection('test2').insertOne({
+        	"deviceID": "", 
+        	"date": d.getDate(), 
+        	"month": d.getMonth()+1, 
+        	"year": d.getFullYear(), 
+        	"time": d.getHours() + "." + d.getMinutes(), 
+        	"P": req.query.Power
+        })
+    });
+});
+
+app.get('/Power', function (req, res) {
+    res.end(JSON.stringify(Power));
+});
+
+//Trang Json trạng thái các thiết bị
+app.get('/state', function (req, res) {
+    res.end(JSON.stringify(deviceState));
+});
+
+
+
+app.get('/checkChangedFlag', function(req,res){
+    if(req.query.device === "NodeMCU"){
+        checkChangedFlag.changedFlagStatus = "false";
+    }
+    res.end(JSON.stringify(checkChangedFlag));
+});
+
+
+/*
+app.get('/process_get', function (req, res) {
+   response = {
+      first_name:req.query.first_name,
+   };
+   a = req.query.first_name;
+   console.log(response);
+   res.end(JSON.stringify(response));
+});
+*/
+
+
+
+
 
 
 
