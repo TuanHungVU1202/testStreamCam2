@@ -41,7 +41,7 @@
                 <div class="col-md-6 offset-md-3 col-sm-12">
                     <h3 class="text-center">
                         Let's chat
-                        <button id="clear" class="btn btn-danger"> CLEAR MESSAGE</button>
+                        <button id="call" type="button" class="btn btn-info">MOMMY's CALLLLLL!!!</button>
                     </h3>
                     <div id="status"></div>
                     <br>
@@ -58,6 +58,8 @@
                         <textarea id="textarea"
                                   class="form-control" placeholder="Enter message here"></textarea>
                     </div>
+                    <br>
+                    <button id="clear" class="btn btn-danger"> CLEAR MESSAGE</button>
                 </div>
             </div>
         
@@ -80,6 +82,8 @@
         var textarea = element('textarea');
         var username = element('username');
         var clearBtn = element('clear');
+        var callBtn = element('call');
+
 
         // Set default status
         var statusDefault = status.textContent;
@@ -144,6 +148,13 @@
             });
             clearBtn.addEventListener('click', function () {
                socket.emit('clear');
+            });
+
+            callBtn.addEventListener('click', function () {
+               socket.emit('input',{
+                   name: "That's MOMMY",
+                   message: "Come out come out where-ever you are!!!"
+               }) ;
             });
 
             //clear mess

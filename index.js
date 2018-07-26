@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 
 //var mongoConfig = require ('./mongoConfig');
 
-var port = process.env.PORT || 2111
+var port = process.env.PORT || 2111;
 app.listen(port, function() {
     console.log("App is running on port " + port);
 });
@@ -23,7 +23,7 @@ const client = require('socket.io').listen(1202).sockets;
 assert = require('assert');
 
 const path = require('path');
-app.set('view engine', 'handlebars')
+app.set('view engine', 'handlebars');
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({
@@ -32,7 +32,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 
-
+//Init variables for data from Sensor
 var temperature = 21;
 var humid = 11;
 var gasDetection = "NO";
@@ -40,9 +40,11 @@ var humanDetection = "NO";
 var securityStatus = "UNARMED";
 var Power = 0;
 
-//getDate, getMonth, getFullYear are defined methods
-//Methods return number, eg. getDate returns day of the month from 1 to 31
-//details at https://www.w3schools.com/jsref/jsref_obj_date.asp
+
+/*  getDate, getMonth, getFullYear are defined methods
+    Methods return number, eg. getDate returns day of the month from 1 to 31
+    details at https://www.w3schools.com/jsref/jsref_obj_date.asp
+    */
 var d1 = new Date();
 dateNow =  d1.getDate();
 monthNow = d1.getMonth() + 1;	//return value from 0 so must plus 1
@@ -57,7 +59,7 @@ var chartCount = 0;
 //var chartTime2 = ["1:00","3:30","4:15","6:15","7:15","8:15"];
 
 //https://stackoverflow.com/questions/7357734/how-do-i-get-the-time-of-day-in-javascript-node-js
-//Login variables
+//Login variables for webServer
 var username = "vthung";
 var password = "admin"; 
 var loginFlag = false;
@@ -88,6 +90,7 @@ scenes.iAmHome = "off";
 scenes.goodmorning = "off";
 scenes.goodnight = "off";
 scenes.security = "off";
+
 
 
 app.get('/', function (req, res) {
@@ -146,8 +149,8 @@ app.get('/home', function (req, res) {
             	date: {$eq: d.getDate()},
             	month: {$eq: d.getMonth()+1},
             	year: {$eq: d.getFullYear()}
-            })
-            cursor.project(projection)
+            });
+            cursor.project(projection);
             cursor.forEach(
                 function(doc) {
                     chartTime[chartCount] = doc.time;
@@ -160,7 +163,7 @@ app.get('/home', function (req, res) {
                     return db.close();
                 }
             ); 
-        })
+        });
 
         //render page with route /home
         res.render('home',{
@@ -182,8 +185,12 @@ app.get('/home', function (req, res) {
         res.redirect('/');
 });
 
-//CONTROL
-//Link with control.handlerbars, see device1ButtonColor and so on
+/*CONTROL
+    Link with control.handlerbars, see device1ButtonColor and so on
+    This should be the procedure in which Application server take data out from mongoDB and control devices
+    by sending command directly back to NodeMCU
+
+*/
 app.get('/control', function (req, res) {
     if (loginFlag === true) {
         //declare connect mongo to use with app.post devices for control page
@@ -191,9 +198,44 @@ app.get('/control', function (req, res) {
             //config devices for floor1
             var floor1 = db.collection('floor1');
 
-            // Post ve trang thai các thiết bị
+            //Check current device state from MongoDB to keep the website up to date
+            var cursor1 = floor1.find(
+                {_id: {$eq:"F1.1"}}
+            );
+            cursor1.forEach(
+                function (doc) {
+                    deviceState.device1 = doc.state;
+                }
+            );
+            var cursor2 = floor1.find(
+                {_id: {$eq:"F1.2"}}
+            );
+            cursor2.forEach(
+                function (doc) {
+                    deviceState.device2 = doc.state;
+                }
+            );
+            var cursor3 = floor1.find(
+                {_id: {$eq:"F1.3"}}
+            );
+            cursor3.forEach(
+                function (doc) {
+                    deviceState.device3 = doc.state;
+                }
+            );
+            var cursor4 = floor1.find(
+                {_id: {$eq:"F1.4"}}
+            );
+            cursor4.forEach(
+                function (doc) {
+                    deviceState.device4 = doc.state;
+                }
+            );
+
+            // Post state of devices to control them
             app.post('/device1', function (req, res) {
                 deviceState.device1 = (deviceState.device1 === "on") ? "off" : "on";
+
                 if (deviceState.device1 === "on") {
                     floor1.updateMany(
                         {"_id": "F1.1", state: "off"},
@@ -324,18 +366,19 @@ app.get('/scenes', function (req, res) {
                 scenes.goodnight = "off";
                 scenes.security = "off";
                 //updateMany for updating database
+                //maybe need an IF statement in oder not to affect the global DB
                 floor1.updateMany(
                     {"_id": "F1.1"},
                     {$set: {state: "on"}}
-                )
+                );
                 floor1.updateMany(
                     {"_id": "F1.2"},
                     {$set: {state: "on"}}
-                )
+                );
                 floor1.updateMany(
                     {"_id": "F1.3"},
                     {$set: {state: "off"}}
-                )
+                );
                 //deviceState for updating button control in Control page
                 deviceState.device1 = "on";
                 deviceState.device2 = "on";
@@ -351,15 +394,15 @@ app.get('/scenes', function (req, res) {
                 floor1.updateMany(
                     {"_id": "F1.1"},
                     {$set: {state: "on"}}
-                )
+                );
                 floor1.updateMany(
                     {"_id": "F1.2"},
                     {$set: {state: "on"}}
-                )
+                );
                 floor1.updateMany(
                     {"_id": "F1.3"},
                     {$set: {state: "on"}}
-                )
+                );
                 deviceState.device1 = "on";
                 deviceState.device2 = "on";
                 deviceState.device3 = "on";
@@ -374,15 +417,15 @@ app.get('/scenes', function (req, res) {
                 floor1.updateMany(
                     {"_id": "F1.1"},
                     {$set: {state: "off"}}
-                )
+                );
                 floor1.updateMany(
                     {"_id": "F1.2"},
                     {$set: {state: "off"}}
-                )
+                );
                 floor1.updateMany(
                     {"_id": "F1.3"},
                     {$set: {state: "off"}}
-                )
+                );
                 deviceState.device1 = "off";
                 deviceState.device2 = "off";
                 deviceState.device3 = "off";
@@ -404,7 +447,7 @@ app.get('/scenes', function (req, res) {
             });
         });
     }
-    else 
+    else
         res.redirect('/');
 });
 
@@ -430,8 +473,8 @@ app.get('/chart', function (req, res) {
                 date: {$eq: dateFilter},
                 month: {$eq: monthFilter},
                 year: {$eq: yearFilter}  
-            })
-            cursor.project(projection)
+            });
+            cursor.project(projection);
             cursor.forEach(
                 function(doc) {
                     chartTime[chartCount] = doc.time;
@@ -444,7 +487,7 @@ app.get('/chart', function (req, res) {
                     return db.close();
                 }
             ); 
-        })
+        });
         res.render('chart',{
             date: dateFilter,
             month: monthFilter,
@@ -482,7 +525,7 @@ app.get('/camera', function (req, res) {
 //CHAT page using NodeJs, MongoDB and Socket.io
 app.get('/chat', function(req, res){
     if (loginFlag === true){
-        //res.render('chat');
+        res.render('chat');
         MongoClient.connect(mongourl, function (err, db) {
             if(err){
                 throw err;
@@ -497,7 +540,7 @@ app.get('/chat', function(req, res){
                 //create func to send status
                 sendStatus = function(s){
                     socket.emit('status',s);
-                }
+                };
                 //access chats in mongoDB
                 chats.find().limit(100).sort({_id:1}).toArray(function (err, res){
                     if(err){
@@ -541,14 +584,19 @@ app.get('/chat', function(req, res){
                 });
             }); //bracket of client.on
         });     //bracket of mongo
-        res.render('chat');
+        //res.render('chat');
     }
     else
         res.redirect('/');
 
 });
-//Đọc trạng thái về từ hệ thống
-/*Problem maybe caused from here. LOOK here first if hardware does not interact with web app
+
+
+
+/*
+Read state SENT from System through INTERNET by nodeMCU. Then log deviceState to MongoDB
+Problem maybe caused from here. LOOK here first if hardware does not interact with web app
+
  */
 app.get('/readStateFromSystem', function (req, res) {
     MongoClient.connect(mongourl, function(err, db){
@@ -559,7 +607,7 @@ app.get('/readStateFromSystem', function (req, res) {
         deviceState.device1 = req.query.device1;
         floor1.updateMany(
             {"_id": "F1.1"},
-            {$set: {"_id": "F1.1", name: "Front Light", state: deviceState.device1}},
+            {$set: {"_id": "F1.1", name: "Front Light", state: req.query.device1}}, //use req.query to GET device state from NodeMCU
             {upsert: true}
             );
     }
@@ -567,7 +615,7 @@ app.get('/readStateFromSystem', function (req, res) {
         deviceState.device2 = req.query.device2;
         floor1.updateMany(
             {"_id": "F1.2"},
-            {$set: {"_id": "F1.2", name: "Stair Light", state: deviceState.device2}},
+            {$set: {"_id": "F1.2", name: "Stair Light", state: req.query.device2}},
             {upsert: true}
             );
     }
@@ -575,7 +623,7 @@ app.get('/readStateFromSystem', function (req, res) {
         deviceState.device3 = req.query.device3;
         floor1.updateMany(
             {"_id": "F1.3"},
-            {$set: {"_id": "F1.3", name: "Air Cooler", state: deviceState.device3}},
+            {$set: {"_id": "F1.3", name: "Air Cooler", state: req.query.device3}},
             {upsert: true}
             );
     }
@@ -583,18 +631,19 @@ app.get('/readStateFromSystem', function (req, res) {
         deviceState.device4 = req.query.device4;
         floor1.updateMany(
             {"_id": "F1.4"},
-            {$set: {"_id": "F1.4", name: "Power Tracker", state: deviceState.device4}},
+            {$set: {"_id": "F1.4", name: "Power Tracker", state: req.query.device4}},
             {upsert: true}
             );
         }
     });
 });
 
-//Đọc nhiệt độ từ hệ thống 
+
+/* Read value from system and return JSON page to client
+*/
 app.get('/temp', function (req, res) {
     res.end(JSON.stringify(temperature));		//return JSON contains value of temperature for customer (return directly on website)
 });
-    											
 app.get('/humid', function (req, res) {		
     res.end(JSON.stringify(humid));				//return JSON contains value of humid for customer (return directly on website)
 });
@@ -602,8 +651,11 @@ app.get('/gas', function (req, res) {
     res.end(JSON.stringify(gasDetection));
 });
 
-//route get from NodeMCU arduino code
-//function sendDataFromSensorToInternet
+
+/*  route get from NodeMCU arduino code function sendDataFromSensorToInternet
+    read value and save to mongoDB
+    */
+
 app.get('/readTempFromSystem', function (req, res) {
     temperature = req.query.temperature;					
 });
@@ -616,6 +668,8 @@ app.get('/readGasFromSystem', function (req, res) {
 app.get('/readHumanFromSystem', function (req, res) {
     humanDetection = req.query.humanDetection;
 });
+
+// Read Power value from System by NodeMCU through Internet, then Log data into MongoDB
 app.get('/readPowerFromSystem', function (req, res) {
     var d = new Date();
     Power = req.query.Power;
@@ -636,13 +690,13 @@ app.get('/Power', function (req, res) {
     res.end(JSON.stringify(Power));
 });
 
-//Trang Json trạng thái các thiết bị
+//JSON page receive state from deviceState
 app.get('/state', function (req, res) {
     res.end(JSON.stringify(deviceState));
 });
 
 
-
+//reset update flag in NodeMCU
 app.get('/checkChangedFlag', function(req,res){
     if(req.query.device === "NodeMCU"){
         checkChangedFlag.changedFlagStatus = "false";
@@ -693,10 +747,10 @@ MongoClient.connect(mongourl, function(err, db){
     var floor1 = db.collection('floor1');
     //below var device is useless but still keep it for clearer view of devices in DB
 	var device = [
-        {"_id": "F1.1", name: "Front Light", state: "OFF"},
-        {"_id": "F1.2", name: "Stair Light", state: "OFF"},
-        {"_id": "F1.3", name: "Air Cooler", state: "OFF"},
-        {"_id": "F1.4", name: "Power Tracker", state: "OFF"}
+        {"_id": "F1.1", name: "Front Light", state: "off"},
+        {"_id": "F1.2", name: "Stair Light", state: "off"},
+        {"_id": "F1.3", name: "Air Cooler", state: "off"},
+        {"_id": "F1.4", name: "Power Tracker", state: "off"}
     ];
 //upsert: true means write new document if not yet exist. otherwise update fields
    	floor1.updateMany(
