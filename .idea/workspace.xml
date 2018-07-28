@@ -2,32 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e45c7004-e1de-44aa-8a48-5e9566b5a9a0" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/public/camTracking/assets/demo.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/camTracking/assets/opencv_haarcascade_converter.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/camTracking/assets/opencv_haarcascade_eye.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/camTracking/assets/opencv_haarcascade_frontalface_alt.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/camTracking/assets/opencv_haarcascade_mouth.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/camTracking/assets/opencv_haarcascade_upper_body.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/camTracking/assets/stats.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/camTracking/build/data/eye-min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/camTracking/build/data/eye.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/camTracking/build/data/face-min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/camTracking/build/data/face.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/camTracking/build/data/mouth-min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/camTracking/build/data/mouth.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/camTracking/build/tracking-min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/camTracking/build/tracking.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mongoConfig.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/camera.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/camera.handlebars" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/chart.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/chart.handlebars" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/chat.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/chat.handlebars" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/control.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/control.handlebars" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/home.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/home.handlebars" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/layouts/main.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/layouts/main.handlebars" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -54,14 +29,14 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="css" value="3" />
-          <entry key="handlebars" value="482" />
+          <entry key="handlebars" value="643" />
           <entry key="js" value="280" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="3" />
-          <entry key="Handlebars/Mustache" value="482" />
+          <entry key="Handlebars/Mustache" value="643" />
           <entry key="JavaScript" value="280" />
         </counts>
       </usages-collector>
@@ -100,8 +75,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/camera.handlebars">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="483">
-              <caret line="57" column="6" lean-forward="true" selection-start-line="57" selection-start-column="6" selection-end-line="57" selection-end-column="6" />
+            <state relative-caret-position="369">
+              <caret line="60" column="81" selection-start-line="60" selection-start-column="81" selection-end-line="60" selection-end-column="81" />
             </state>
           </provider>
         </entry>
@@ -323,12 +298,12 @@
       <workItem from="1532679827151" duration="4743000" />
       <workItem from="1532745397242" duration="19000" />
       <workItem from="1532745546665" duration="64000" />
-      <workItem from="1532745641985" duration="379000" />
+      <workItem from="1532745641985" duration="559000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="120842000" />
+    <option name="totallyTimeSpent" value="121022000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="974" height="1047" extended-state="0" />
@@ -557,8 +532,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/camera.handlebars">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="57" column="6" lean-forward="true" selection-start-line="57" selection-start-column="6" selection-end-line="57" selection-end-column="6" />
+        <state relative-caret-position="369">
+          <caret line="60" column="81" selection-start-line="60" selection-start-column="81" selection-end-line="60" selection-end-column="81" />
         </state>
       </provider>
     </entry>

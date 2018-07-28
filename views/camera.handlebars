@@ -32,6 +32,7 @@
     </div>
 </nav>
 
+<!-- put this before page inner (body) to load every scripts before body -->
 <script src="camTracking/build/tracking-min.js"></script>
 <script src="camTracking/build/data/face-min.js"></script>
 <script src="camTracking/dat.gui/build/dat.gui.min.js"></script>
@@ -57,6 +58,7 @@
     </div>
 </div>
 
+<!-- put this func after body to load it right after every content on page loaded -->
 <script>
     window.onload = function() {
         var video = document.getElementById('video');
