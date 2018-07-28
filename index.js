@@ -199,6 +199,8 @@ app.get('/control', function (req, res) {
             var floor1 = db.collection('floor1');
 
             //Check current device state from MongoDB to keep the website up to date
+            //setInterval to run the inside function repeatedly with Interval = 10ms to keep website up-to-date as fast as possible
+            setInterval(function () {
             var cursor1 = floor1.find(
                 {_id: {$eq:"F1.1"}}
             );
@@ -231,6 +233,7 @@ app.get('/control', function (req, res) {
                     deviceState.device4 = doc.state;
                 }
             );
+            },10);       //10 ms
 
             // Post state of devices to control them
             app.post('/device1', function (req, res) {
@@ -239,7 +242,7 @@ app.get('/control', function (req, res) {
                 if (deviceState.device1 === "on") {
                     floor1.updateMany(
                         {"_id": "F1.1", state: "off"},
-                        {$set: {state: "on"}}
+                        {$set: {state: "on"}}               //without $set mongoDB won't update state field
                     )
                 }
                 else {
@@ -249,7 +252,7 @@ app.get('/control', function (req, res) {
                     )
                 }
                 checkChangedFlag.changedFlagStatus = "true";
-                res.redirect('/control');
+                //res.redirect('/control');
             });
             app.post('/device2', function (req, res) {
                 deviceState.device2 = (deviceState.device2 === "on") ? "off" : "on";
@@ -266,7 +269,7 @@ app.get('/control', function (req, res) {
                     )
                 }
                 checkChangedFlag.changedFlagStatus = "true";
-                res.redirect('/control');
+                //res.redirect('/control');
             });
             app.post('/device3', function (req, res) {
                 deviceState.device3 = (deviceState.device3 === "on") ? "off" : "on";
@@ -283,7 +286,7 @@ app.get('/control', function (req, res) {
                     )
                 }
                 checkChangedFlag.changedFlagStatus = "true";
-                res.redirect('/control');
+                //res.redirect('/control');
             });
             app.post('/device4', function (req, res) {
                 deviceState.device4 = (deviceState.device4 === "on") ? "off" : "on";
@@ -300,7 +303,7 @@ app.get('/control', function (req, res) {
                     )
                 }
                 checkChangedFlag.changedFlagStatus = "true";
-                res.redirect('/control');
+                //res.redirect('/control');
             });
 
 

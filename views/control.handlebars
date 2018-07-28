@@ -99,7 +99,7 @@
             background-color: white;
         }
     </style>   
-    <h2> SMARTHOME CONTROL PAGE</h2>
+    <h2> DEVICE CONTROL PAGE</h2>
     <br>
     
 <!-- https://stackoverflow.com/questions/25983603/how-to-submit-html-form-without-redirection
@@ -274,20 +274,20 @@
 <script>
     function updateData(){
         $.ajax({
-            url: "./state", 
+            url: "./state",
             dataType: 'JSON',
             success: function(result){
-                if(result.device1 === "on"){ 
+                if(result.device1 === "on"){
                     $("#device1").text("ON");
-                    $("#device1").css("color","green");
+                    $("#device1").css("color","blue");
                 }
-                if(result.device1 === "off"){ 
+                if(result.device1 === "off"){
                     $("#device1").text("OFF");
                     $("#device1").css("color","red");
                 }
                 if(result.device2 === "on"){ 
                     $("#device2").text("ON");
-                    $("#device2").css("color","green");
+                    $("#device2").css("color","blue");
                 }
                 if(result.device2 === "off"){ 
                     $("#device2").text("OFF");
@@ -295,7 +295,7 @@
                 }
                 if(result.device3 === "on"){ 
                     $("#device3").text("ON");
-                    $("#device3").css("color","green");
+                    $("#device3").css("color","blue");
                 }
                 if(result.device3 === "off"){ 
                     $("#device3").text("OFF");
@@ -303,7 +303,7 @@
                 }
                 if(result.device4 === "on"){ 
                     $("#device4").text("ON");
-                    $("#device4").css("color","green");
+                    $("#device4").css("color","blue");
                 }
                 if(result.device4 === "off"){ 
                     $("#device4").text("OFF");

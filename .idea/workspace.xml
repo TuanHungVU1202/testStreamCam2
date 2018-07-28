@@ -2,79 +2,119 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e45c7004-e1de-44aa-8a48-5e9566b5a9a0" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/public/camTracking/assets/demo.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/camTracking/assets/opencv_haarcascade_converter.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/camTracking/assets/opencv_haarcascade_eye.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/camTracking/assets/opencv_haarcascade_frontalface_alt.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/camTracking/assets/opencv_haarcascade_mouth.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/camTracking/assets/opencv_haarcascade_upper_body.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/camTracking/assets/stats.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/camTracking/build/data/eye-min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/camTracking/build/data/eye.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/camTracking/build/data/face-min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/camTracking/build/data/face.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/camTracking/build/data/mouth-min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/camTracking/build/data/mouth.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/camTracking/build/tracking-min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/camTracking/build/tracking.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mongoConfig.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/camera.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/camera.handlebars" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/chart.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/chart.handlebars" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/chat.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/chat.handlebars" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/control.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/control.handlebars" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/home.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/home.handlebars" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/layouts/main.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/views/layouts/main.handlebars" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="-1059435482">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="4" />
+          <entry key="project.open.time.10" value="1" />
+          <entry key="project.open.time.11" value="1" />
+          <entry key="project.open.time.13" value="1" />
+          <entry key="project.open.time.14" value="1" />
+          <entry key="project.open.time.17" value="1" />
+          <entry key="project.opened" value="5" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="css" value="3" />
+          <entry key="handlebars" value="482" />
+          <entry key="js" value="280" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="CSS" value="3" />
+          <entry key="Handlebars/Mustache" value="482" />
+          <entry key="JavaScript" value="280" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="css" value="6" />
+          <entry key="handlebars" value="21" />
+          <entry key="html" value="2" />
+          <entry key="js" value="19" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="CSS" value="6" />
+          <entry key="HTML" value="2" />
+          <entry key="Handlebars/Mustache" value="21" />
+          <entry key="JavaScript" value="19" />
+        </counts>
+      </usages-collector>
+    </session>
   </component>
   <component name="FavoritesManager">
     <favorites_list name="testStreamCam-2" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="356">
-              <caret line="69" column="25" lean-forward="true" selection-start-line="69" selection-start-column="25" selection-end-line="69" selection-end-column="25" />
-              <folding>
-                <element signature="e#351#405#0" />
-                <element signature="e#822#844#0" />
-                <element signature="e#7624#7805#0" />
-                <element signature="e#11454#15337#0" />
-                <element signature="e#15144#16496#0" />
-              </folding>
+            <state relative-caret-position="2241">
+              <caret line="385" column="43" lean-forward="true" selection-start-line="385" selection-start-column="43" selection-end-line="385" selection-end-column="43" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="chart.handlebars" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/chart.handlebars">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/views/camera.handlebars">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-770">
-              <caret line="18" column="46" selection-start-line="18" selection-start-column="46" selection-end-line="18" selection-end-column="46" />
+            <state relative-caret-position="483">
+              <caret line="57" column="6" lean-forward="true" selection-start-line="57" selection-start-column="6" selection-end-line="57" selection-end-column="6" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="control.handlebars" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/views/control.handlebars">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
-              <caret line="276" column="28" lean-forward="true" selection-start-line="276" selection-start-column="28" selection-end-line="276" selection-end-column="28" />
-            </state>
-          </provider>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/camTracking/build/data/face.js">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>db</find>
-      <find>client</find>
-      <find>connect</find>
-      <find>temperature</find>
-      <find>camera</find>
-      <find>video</find>
-      <find>gotStream</find>
-      <find>cam</find>
-      <find>window</find>
-      <find>deviceState</find>
-      <find>ON</find>
-      <find>device4</find>
-      <find>floor1</find>
-      <find>message</find>
-      <find>sendStatus</find>
-      <find>socket.on</find>
       <find>id</find>
       <find>find</find>
       <find>13</find>
@@ -83,12 +123,28 @@
       <find>State</find>
       <find>readS</find>
       <find>chat</find>
-      <find>state</find>
       <find>clearBtn</find>
       <find>/state</find>
       <find>post device</find>
-      <find>insert</find>
       <find>device1</find>
+      <find>clear</find>
+      <find>CONTRO</find>
+      <find>insert</find>
+      <find>$set</find>
+      <find>state</find>
+      <find>process</find>
+      <find>div</find>
+      <find>camvas</find>
+      <find>control</find>
+      <find>flag</find>
+      <find>background</find>
+      <find>canvas</find>
+      <find>myChart</find>
+      <find>camera</find>
+      <find>video</find>
+      <find>left</find>
+      <find>top</find>
+      <find>slider</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -99,12 +155,21 @@
       <list>
         <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/public/webRTC/main.js" />
-        <option value="$PROJECT_DIR$/views/camera.handlebars" />
         <option value="$PROJECT_DIR$/public/assets/css/chatMain.css" />
         <option value="$PROJECT_DIR$/views/chat.handlebars" />
         <option value="$PROJECT_DIR$/views/control.handlebars" />
+        <option value="$PROJECT_DIR$/camvas.js" />
+        <option value="$PROJECT_DIR$/public/webRTC/main.js" />
+        <option value="$PROJECT_DIR$/public/webRTC/camvas.js" />
+        <option value="$PROJECT_DIR$/public/assets/css/custom-styles.css" />
+        <option value="$PROJECT_DIR$/views/camera.html" />
         <option value="$PROJECT_DIR$/index.js" />
+        <option value="$PROJECT_DIR$/views/chart.handlebars" />
+        <option value="$PROJECT_DIR$/views/home.handlebars" />
+        <option value="$PROJECT_DIR$/views/layouts/main.handlebars" />
+        <option value="$PROJECT_DIR$/camTracking/build/tracking.js" />
+        <option value="$PROJECT_DIR$/public/camTracking/assets/stats.min.js" />
+        <option value="$PROJECT_DIR$/views/camera.handlebars" />
       </list>
     </option>
   </component>
@@ -122,10 +187,11 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths>
       <path value="$PROJECT_DIR$/package.json" />
+      <path value="$PROJECT_DIR$/public/camTracking/dat.gui/package.json" />
       <path value="$PROJECT_DIR$/public/morris_new/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds">
     <option name="x" value="-7" />
     <option name="width" value="974" />
     <option name="height" value="1047" />
@@ -152,14 +218,29 @@
               <item name="testStreamCam-2" type="b2602c69:ProjectViewProjectNode" />
               <item name="testStreamCam-2" type="462c0819:PsiDirectoryNode" />
               <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="camTracking" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="testStreamCam-2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="testStreamCam-2" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="camTracking" type="462c0819:PsiDirectoryNode" />
               <item name="assets" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="testStreamCam-2" type="b2602c69:ProjectViewProjectNode" />
               <item name="testStreamCam-2" type="462c0819:PsiDirectoryNode" />
               <item name="public" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
+              <item name="camTracking" type="462c0819:PsiDirectoryNode" />
+              <item name="build" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="testStreamCam-2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="testStreamCam-2" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="camTracking" type="462c0819:PsiDirectoryNode" />
+              <item name="build" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="testStreamCam-2" type="b2602c69:ProjectViewProjectNode" />
@@ -183,7 +264,22 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="com.chrisrm.idea.config" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\HP\Google Drive (1450231@hcmut.edu.vn)\BK\Thesis\myOwnWork\Code\Web\testStreamCam-2\public\camTracking" />
+      <recent name="C:\Users\HP\Google Drive (1450231@hcmut.edu.vn)\BK\Thesis\myOwnWork\Code\Web\testStreamCam-2\public" />
+      <recent name="C:\Users\HP\Google Drive (1450231@hcmut.edu.vn)\BK\Thesis\myOwnWork\Code\Web\testStreamCam-2\camTracking\build" />
+      <recent name="C:\Users\HP\Google Drive (1450231@hcmut.edu.vn)\BK\Thesis\myOwnWork\Code\Web\testStreamCam-2" />
+      <recent name="C:\Users\HP\Google Drive (1450231@hcmut.edu.vn)\BK\Thesis\myOwnWork\Code\Web\testStreamCam-2\public\webRTC" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\HP\Google Drive (1450231@hcmut.edu.vn)\BK\Thesis\myOwnWork\Code\Web\testStreamCam-2\camTracking\assets" />
+      <recent name="C:\Users\HP\Google Drive (1450231@hcmut.edu.vn)\BK\Thesis\myOwnWork\Code\Web\testStreamCam-2\camTracking\build\data" />
+      <recent name="C:\Users\HP\Google Drive (1450231@hcmut.edu.vn)\BK\Thesis\myOwnWork\Code\Web\testStreamCam-2\camTracking\build" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -198,7 +294,9 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration name="index.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="index.js" working-dir="$PROJECT_DIR$" />
+    <configuration name="index.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="index.js" working-dir="$PROJECT_DIR$">
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Node.js.index.js" />
@@ -219,35 +317,41 @@
       <workItem from="1531584213126" duration="52000" />
       <workItem from="1532137135507" duration="5942000" />
       <workItem from="1532313834151" duration="3027000" />
-      <workItem from="1532418248258" duration="53294000" />
+      <workItem from="1532418248258" duration="63701000" />
+      <workItem from="1532653686151" duration="5138000" />
+      <workItem from="1532658956467" duration="17980000" />
+      <workItem from="1532679827151" duration="4743000" />
+      <workItem from="1532745397242" duration="19000" />
+      <workItem from="1532745546665" duration="64000" />
+      <workItem from="1532745641985" duration="379000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="82112000" />
+    <option name="totallyTimeSpent" value="120842000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-7" y="0" width="974" height="1047" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.7780822" visible="true" weight="0.098524764" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.7780822" weight="0.46891466" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="npm" order="2" side_tool="true" weight="0.32982087" />
+      <window_info id="Favorites" order="3" sideWeight="0.22191781" side_tool="true" weight="0.15015806" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32925472" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3177874" />
+      <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="5" />
       <window_info anchor="bottom" id="Docker" order="6" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info id="npm" order="2" side_tool="true" weight="0.32982087" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3311185" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.16557734" />
-      <window_info id="Favorites" order="2" sideWeight="0.22191781" side_tool="true" weight="0.15015806" />
-      <window_info anchor="right" x="141" y="533" width="1880" height="543" id="Debug" order="3" type="FLOATING" weight="0.6111111" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.17086528" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" x="74" y="703" width="1601" height="513" id="Debug" order="3" type="FLOATING" weight="0.6111111" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -255,14 +359,6 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints-dialog>
-        <breakpoints-dialog />
-      </breakpoints-dialog>
-      <option name="time" value="47" />
-    </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">
@@ -281,79 +377,9 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1650">
-          <caret line="75" column="37" lean-forward="true" selection-start-line="75" selection-start-column="37" selection-end-line="75" selection-end-column="37" />
-          <folding>
-            <element signature="e#351#405#0" />
-            <element signature="e#822#844#0" />
-            <element signature="e#7624#7805#0" />
-            <element signature="e#11454#15337#0" />
-            <element signature="e#15144#16496#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="12760">
-          <caret line="580" column="33" lean-forward="true" selection-start-line="580" selection-start-column="33" selection-end-line="580" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/webRTC/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="25" column="20" selection-start-line="25" selection-start-column="20" selection-end-line="25" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/camera.handlebars">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1034">
-          <caret line="47" lean-forward="true" selection-start-line="47" selection-end-line="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="20" column="36" selection-start-line="20" selection-start-column="36" selection-end-line="20" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/webRTC/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="25" column="20" selection-start-line="25" selection-start-column="20" selection-end-line="25" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/camera.handlebars">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="858">
-          <caret line="39" column="32" selection-start-line="39" selection-start-column="32" selection-end-line="39" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="20" column="36" lean-forward="true" selection-start-line="20" selection-start-column="36" selection-end-line="20" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Procfile" />
     <entry file="file://$PROJECT_DIR$/app.js" />
     <entry file="file://$PROJECT_DIR$/package-lock.json" />
-    <entry file="file://$PROJECT_DIR$/views/home.handlebars">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1734">
-          <caret line="19" column="17" lean-forward="true" selection-start-line="19" selection-start-column="17" selection-end-line="19" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="506">
@@ -361,43 +387,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/webRTC/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="25" column="20" selection-start-line="25" selection-start-column="20" selection-end-line="25" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/layouts/main.handlebars">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1734">
-          <caret line="45" column="69" lean-forward="true" selection-start-line="45" selection-start-column="69" selection-end-line="45" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/camera.handlebars">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1034">
-          <caret line="47" lean-forward="true" selection-start-line="47" selection-end-line="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/scenes.handlebars">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1452" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/express/lib/router/layer.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1266">
           <caret line="94" column="4" selection-start-line="94" selection-start-column="4" selection-end-line="94" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/express/lib/application.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="480" column="21" selection-start-line="480" selection-start-column="21" selection-end-line="480" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -415,13 +408,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/chat.handlebars">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="115" column="68" lean-forward="true" selection-start-line="115" selection-start-column="67" selection-end-line="115" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/assets/css/chatMain.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="990">
@@ -429,31 +415,150 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.js">
+    <entry file="file://$PROJECT_DIR$/node_modules/express/lib/application.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="356">
-          <caret line="69" column="25" lean-forward="true" selection-start-line="69" selection-start-column="25" selection-end-line="69" selection-end-column="25" />
-          <folding>
-            <element signature="e#351#405#0" />
-            <element signature="e#822#844#0" />
-            <element signature="e#7624#7805#0" />
-            <element signature="e#11454#15337#0" />
-            <element signature="e#15144#16496#0" />
-          </folding>
+        <state relative-caret-position="325">
+          <caret line="533" column="21" selection-start-line="533" selection-start-column="21" selection-end-line="533" selection-end-column="21" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/express/lib/response.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="239">
+          <caret line="1007" column="6" selection-start-line="1007" selection-start-column="6" selection-end-line="1007" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../../Other References/picojs-5ded6033e7563e357a757b6f641e18c665d97f30/cam/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3718">
+          <caret line="90" column="31" lean-forward="true" selection-start-line="90" selection-start-column="31" selection-end-line="90" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/webRTC/pico.js" />
+    <entry file="file://$PROJECT_DIR$/public/webRTC/camvas.js" />
+    <entry file="file://$PROJECT_DIR$/public/webRTC/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="10" column="55" lean-forward="true" selection-start-line="10" selection-start-column="55" selection-end-line="10" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/camTracking/build/data/eye.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/camTracking/assets/opencv_haarcascade_converter.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/camTracking/build/tracking-min.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/camTracking/assets/demo.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="11" column="18" lean-forward="true" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/assets/css/custom-styles.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="638">
+          <caret line="29" column="33" lean-forward="true" selection-start-line="29" selection-start-column="33" selection-end-line="29" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/assets/css/bootstrap.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="4" column="407" selection-start-line="4" selection-start-column="407" selection-end-line="4" selection-end-column="407" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/camera.html" />
     <entry file="file://$PROJECT_DIR$/views/chart.handlebars">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-770">
-          <caret line="18" column="46" selection-start-line="18" selection-start-column="46" selection-end-line="18" selection-end-column="46" />
+        <state relative-caret-position="670">
+          <caret line="107" column="47" lean-forward="true" selection-start-line="107" selection-start-column="47" selection-end-line="107" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/chat.handlebars">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="539">
+          <caret line="62" column="19" selection-start-line="62" selection-start-column="19" selection-end-line="62" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/control.handlebars">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="276" column="28" lean-forward="true" selection-start-line="276" selection-start-column="28" selection-end-line="276" selection-end-column="28" />
+        <state relative-caret-position="670">
+          <caret line="317" column="4" selection-start-line="317" selection-start-column="4" selection-end-line="317" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/home.handlebars">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="792">
+          <caret line="181" column="46" selection-start-line="181" selection-start-column="39" selection-end-line="181" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/scenes.handlebars">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/layouts/main.handlebars">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="18" column="52" lean-forward="true" selection-start-line="18" selection-start-column="52" selection-end-line="18" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/camTracking/build/data/face-min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1452" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/camTracking/assets/stats.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="11" column="33" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/camTracking/dat.gui/build/dat.gui.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1848">
+          <caret line="1671" column="1734" lean-forward="true" selection-start-line="1671" selection-start-column="1734" selection-end-line="1671" selection-end-column="1734" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/camTracking/assets/opencv_haarcascade_frontalface_alt.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-668483" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/camTracking/build/data/face.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2241">
+          <caret line="385" column="43" lean-forward="true" selection-start-line="385" selection-start-column="43" selection-end-line="385" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/camTracking/build/tracking.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2301">
+          <caret line="417" column="29" selection-start-line="417" selection-start-column="29" selection-end-line="417" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/camera.handlebars">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="57" column="6" lean-forward="true" selection-start-line="57" selection-start-column="6" selection-end-line="57" selection-end-column="6" />
         </state>
       </provider>
     </entry>
